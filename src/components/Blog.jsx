@@ -8,7 +8,7 @@ const Blog = ({ onReadMore }) => {
       title: 'Building Scalable APIs with FastAPI',
       excerpt: 'Learn how to build high-performance REST APIs using FastAPI, including best practices for authentication, validation, and async operations.',
       date: '2024-10-01',
-      author: 'Your Name',
+      author: 'Shiva',
       readTime: '8 min read',
       tags: ['FastAPI', 'Python', 'Backend'],
       content: `

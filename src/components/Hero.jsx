@@ -88,7 +88,7 @@ const Hero = () => {
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 animate-slide-up">
           Hi, I'm{" "}
           <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text animate-gradient">
-            Your Name
+            Shiva
           </span>
         </h1>
 

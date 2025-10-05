@@ -8,7 +8,7 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, S
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce platform built with Django, PostgreSQL, and Next.js. Features include payment integration, inventory management, and real-time updates.',
       tech: ['Django', 'Next.js', 'PostgreSQL', 'Redis'],
-      github: '#',
+      github: 'https://github.com/SHIVA-SINGHx',
       live: '#',
       gradient: 'from-blue-600 to-cyan-600'
     },
@@ -17,7 +17,7 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, S
       title: 'API Gateway Service',
       description: 'High-performance API gateway built with FastAPI. Includes rate limiting, authentication, and microservices orchestration.',
       tech: ['FastAPI', 'MongoDB', 'Docker', 'Redis'],
-      github: '#',
+      github: 'https://github.com/SHIVA-SINGHx',
       live: '#',
       gradient: 'from-cyan-600 to-blue-600'
     },
@@ -26,7 +26,7 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, S
       title: 'DevOps Dashboard',
       description: 'Real-time monitoring dashboard for cloud infrastructure. Features deployment tracking, resource monitoring, and automated alerts.',
       tech: ['React', 'FastAPI', 'AWS', 'Docker'],
-      github: '#',
+      github: 'https://github.com/SHIVA-SINGHx',
       live: '#',
       gradient: 'from-blue-500 to-cyan-500'
     }

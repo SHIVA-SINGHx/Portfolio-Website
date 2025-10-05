@@ -22,7 +22,7 @@ const Footer = () => {
           <a href="https://x.com/Shivatwd1" className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
             <Twitter className="w-6 h-6" />
           </a>
-          <a href="mailto:shivasingh.1dev@gmail.com" className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+          <a href="shivasingh.1dev@gmail.com" className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
             <Mail className="w-6 h-6" />
           </a>
         </div>
