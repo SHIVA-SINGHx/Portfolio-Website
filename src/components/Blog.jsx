@@ -61,7 +61,7 @@ FastAPI is an excellent choice for building modern APIs. Its speed, type safety,
       title: 'PostgreSQL vs MongoDB: Choosing the Right Database',
       excerpt: 'A comprehensive comparison of PostgreSQL and MongoDB, helping you make informed decisions for your next project.',
       date: '2024-09-28',
-      author: 'Your Name',
+      author: 'Shiva',
       readTime: '10 min read',
       tags: ['Database', 'PostgreSQL', 'MongoDB'],
       content: `
@@ -111,7 +111,7 @@ Both databases have their place. Choose based on your specific requirements, not
       title: 'DevOps Best Practices for 2024',
       excerpt: 'Essential DevOps practices every developer should know, from CI/CD pipelines to container orchestration.',
       date: '2024-09-25',
-      author: 'Your Name',
+      author: 'Shiva',
       readTime: '12 min read',
       tags: ['DevOps', 'Docker', 'CI/CD'],
       content: `
