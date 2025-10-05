@@ -1,4 +1,12 @@
 import { useState } from "react";
+import Hero from "./Hero";
+import Skills from "./Skills";
+import Projects from "./Projects";
+import BlogDetail from "./BlogDetail";
+import Blog from "./Blog";
+import Contact from "./Contact";
+import Footer from "./Footer";
+
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -27,7 +35,7 @@ export default function App() {
           <div id="home">
             <Hero />
           </div>
-          <Skills />
+          <SkillS />
           <Projects />
           <Blog onReadMore={handleReadMore} />
           <Contact />

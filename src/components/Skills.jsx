@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export const Skills = () => {
+const Skills = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   const skills = [
@@ -138,3 +138,5 @@ export const Skills = () => {
     </section>
   );
 };
+
+export default Skills

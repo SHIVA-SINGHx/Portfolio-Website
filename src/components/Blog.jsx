@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Blog = ({ onReadMore }) => {
+const Blog = ({ onReadMore }) => {
   const [blogs] = useState([
     {
       id: 1,
@@ -225,3 +225,5 @@ Implementing these practices will significantly improve your deployment process 
     </section>
   );
 };
+
+export default Blog

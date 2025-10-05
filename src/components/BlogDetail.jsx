@@ -1,4 +1,6 @@
-export const BlogDetail = ({ blog, onBack }) => {
+import React from 'react'
+
+const BlogDetail = ({ blog, onBack }) => {
   return (
     <div className="min-h-screen bg-black py-24">
       <div className="container mx-auto px-6 max-w-4xl">
@@ -45,3 +47,5 @@ export const BlogDetail = ({ blog, onBack }) => {
     </div>
   );
 };
+
+export default BlogDetail

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const Navigation = ({ currentView }) => {
+const Navigation = ({ currentView }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -51,3 +51,5 @@ export const Navigation = ({ currentView }) => {
     </nav>
   );
 };
+
+export default Navigation

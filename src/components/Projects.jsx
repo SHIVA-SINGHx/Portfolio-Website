@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Projects = () => {
+ const Projects = () => {
   const [projects] = useState([
     {
       id: 1,
@@ -92,3 +92,5 @@ export const Projects = () => {
     </section>
   );
 };
+
+export default Projects

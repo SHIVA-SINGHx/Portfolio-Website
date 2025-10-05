@@ -19,7 +19,7 @@ import {
   GitBranch,
 } from "lucide-react";
 
-export const Hero = () => {
+const Hero = () => {
   const roles = [
     "Full Stack Developer",
     "MERN Stack Expert",
@@ -160,3 +160,5 @@ export const Hero = () => {
     </section>
   );
 };
+
+export default Hero
