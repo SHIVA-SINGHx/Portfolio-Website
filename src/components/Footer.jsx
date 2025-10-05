@@ -1,4 +1,5 @@
 import React from 'react'
+import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, Server, ChevronRight, Calendar, User, Terminal, Layout, Boxes, GitBranch } from 'lucide-react';
 
 const Footer = () => {
   return (
