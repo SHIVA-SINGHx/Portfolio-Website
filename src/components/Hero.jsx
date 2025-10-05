@@ -19,6 +19,8 @@ import {
   GitBranch,
 } from "lucide-react";
 
+import pfp from '../assets/pfp.png'
+
 const Hero = () => {
   const roles = [
     "Full Stack Developer",
@@ -30,6 +32,7 @@ const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+
 
   useEffect(() => {
     const role = roles[currentRole];
@@ -71,17 +74,17 @@ const Hero = () => {
       </div>
 
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-600 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-cyan-600 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-1/4 w-96 h-96  rounded-full blur-3xl animate-float-delayed"></div>
       </div>
 
       <div className="container mx-auto px-6 z-10 text-center">
         <div className="mb-8 animate-scale-in">
-          <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 p-1 relative group">
-            <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-6xl font-bold text-white group-hover:scale-110 transition-transform duration-300">
-              D
+          <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-500  to-blue-600 p-1 relative group">
+            <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-6xl font-bold text-white group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+              <img src={pfp} alt="" />
             </div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-brtransition-opacity"></div>
           </div>
         </div>
 
