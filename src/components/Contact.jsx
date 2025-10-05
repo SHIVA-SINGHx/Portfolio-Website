@@ -16,25 +16,25 @@ const Contact = () => {
         
         <div className="max-w-2xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <a href="mailto:your.email@example.com" className="group relative bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500 transition-all text-center transform hover:scale-105">
+            <a href="shivasingh.1dev@gmail.com" className="group relative bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500 transition-all text-center transform hover:scale-105">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity rounded-2xl"></div>
               <Mail className="w-10 h-10 text-cyan-400 mx-auto mb-4 group-hover:scale-110 transition-transform relative z-10" />
               <h3 className="text-white font-semibold mb-2 relative z-10">Email</h3>
-              <p className="text-gray-400 text-sm relative z-10">your.email@example.com</p>
+              <p className="text-gray-400 text-sm relative z-10">shivasingh.1dev@gmail.com</p>
             </a>
             
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="group relative bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500 transition-all text-center transform hover:scale-105">
+            <a href="https://github.com/SHIVA-SINGHx" target="_blank" rel="noopener noreferrer" className="group relative bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500 transition-all text-center transform hover:scale-105">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity rounded-2xl"></div>
               <Github className="w-10 h-10 text-cyan-400 mx-auto mb-4 group-hover:scale-110 transition-transform relative z-10" />
               <h3 className="text-white font-semibold mb-2 relative z-10">GitHub</h3>
-              <p className="text-gray-400 text-sm relative z-10">@yourusername</p>
+              <p className="text-gray-400 text-sm relative z-10">@SHIVA-SINGHx</p>
             </a>
             
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="group relative bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500 transition-all text-center transform hover:scale-105">
+            <a href="https://www.linkedin.com/in/shiva-singh-b2104a373/" target="_blank" rel="noopener noreferrer" className="group relative bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500 transition-all text-center transform hover:scale-105">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity rounded-2xl"></div>
               <Linkedin className="w-10 h-10 text-cyan-400 mx-auto mb-4 group-hover:scale-110 transition-transform relative z-10" />
               <h3 className="text-white font-semibold mb-2 relative z-10">LinkedIn</h3>
-              <p className="text-gray-400 text-sm relative z-10">/yourprofile</p>
+              <p className="text-gray-400 text-sm relative z-10">Shiva Singh</p>
             </a>
           </div>
           
