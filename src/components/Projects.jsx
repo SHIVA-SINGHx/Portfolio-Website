@@ -9,7 +9,7 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, S
       description: 'Gynmex is full-stack AI-Powered fitness assistant that help will help you to manage your fitness goal.',
       tech: ['Next.js','Gemini-Api','MongoDB', 'Clerk', 'Shadcn-Ui'],
       github: 'https://github.com/SHIVA-SINGHx/Gymnex',
-      live: '#',
+      live: 'https://gymnex.vercel.app/',
       gradient: 'from-blue-600 to-cyan-600'
     },
     {
