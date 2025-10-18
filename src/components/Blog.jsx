@@ -11,50 +11,8 @@ const Blog = ({ onReadMore }) => {
       author: 'Shiva',
       readTime: '8 min read',
       tags: ['FastAPI', 'Python', 'Backend'],
-      content: `
-# Building Scalable APIs with FastAPI
-
-FastAPI has revolutionized the way we build APIs in Python. Its modern features and incredible performance make it the go-to choice for modern web applications.
-
-## Why FastAPI?
-
-FastAPI offers several advantages:
-- **High Performance**: Comparable to NodeJS and Go
-- **Type Safety**: Built-in Pydantic validation
-- **Automatic Documentation**: Interactive API docs with Swagger UI
-- **Async Support**: Native async/await support
-
-## Getting Started
-
-First, install FastAPI:
-\`\`\`bash
-pip install fastapi uvicorn
-\`\`\`
-
-## Creating Your First Endpoint
-
-Here's a simple example:
-\`\`\`python
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-\`\`\`
-
-## Best Practices
-
-1. Use dependency injection for database connections
-2. Implement proper error handling
-3. Add authentication middleware
-4. Use background tasks for heavy operations
-
-## Conclusion
-
-FastAPI is an excellent choice for building modern APIs. Its speed, type safety, and developer experience make it stand out from other frameworks.
-      `
+  
+      
     },
     {
       id: 2,
@@ -64,47 +22,8 @@ FastAPI is an excellent choice for building modern APIs. Its speed, type safety,
       author: 'Shiva',
       readTime: '10 min read',
       tags: ['Database', 'PostgreSQL', 'MongoDB'],
-      content: `
-# PostgreSQL vs MongoDB: Choosing the Right Database
-
-Choosing the right database is crucial for your application's success. Let's explore the differences between PostgreSQL and MongoDB.
-
-## PostgreSQL: The Relational Powerhouse
-
-PostgreSQL is a powerful, open-source relational database with:
-- ACID compliance
-- Complex queries with JOINs
-- Strong data integrity
-- Rich ecosystem
-
-## MongoDB: The Document Database
-
-MongoDB offers:
-- Flexible schema
-- Horizontal scalability
-- Fast development
-- JSON-like documents
-
-## When to Use PostgreSQL
-
-Use PostgreSQL when:
-- You need complex relationships
-- Data integrity is critical
-- You require transactions
-- You have structured data
-
-## When to Use MongoDB
-
-Choose MongoDB when:
-- Schema flexibility is needed
-- You're working with unstructured data
-- Horizontal scaling is priority
-- Rapid development is required
-
-## Conclusion
-
-Both databases have their place. Choose based on your specific requirements, not trends.
-      `
+    
+      
     },
     {
       id: 3,
@@ -114,51 +33,7 @@ Both databases have their place. Choose based on your specific requirements, not
       author: 'Shiva',
       readTime: '12 min read',
       tags: ['DevOps', 'Docker', 'CI/CD'],
-      content: `
-# DevOps Best Practices for 2024
-
-DevOps continues to evolve. Here are the essential practices you should implement in your workflow.
-
-## Continuous Integration/Continuous Deployment
-
-CI/CD is the backbone of modern DevOps:
-- Automated testing
-- Frequent deployments
-- Quick feedback loops
-- Reduced manual errors
-
-## Infrastructure as Code
-
-Treat your infrastructure like code:
-\`\`\`yaml
-version: '3.8'
-services:
-  web:
-    image: nginx
-    ports:
-      - "80:80"
-\`\`\`
-
-## Container Orchestration
-
-Docker and Kubernetes are essential:
-- Consistent environments
-- Easy scaling
-- Resource efficiency
-- Service discovery
-
-## Monitoring and Logging
-
-Never deploy blind:
-- Real-time metrics
-- Centralized logging
-- Alert systems
-- Performance tracking
-
-## Conclusion
-
-Implementing these practices will significantly improve your deployment process and application reliability.
-      `
+ 
     }
   ]);
 
@@ -214,7 +89,8 @@ Implementing these practices will significantly improve your deployment process 
                     onClick={() => onReadMore(blog)}
                     className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors font-semibold group/btn"
                   >
-                    Read More
+                    <a href="https://gymnex.vercel.app/">Read More</a>
+                    
                     <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>

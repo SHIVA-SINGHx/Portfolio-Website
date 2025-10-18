@@ -3,7 +3,6 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, S
 import gymnexImage from '../assets/gymnex.png'; 
 
 
-
 // Projects Component
 const Projects = () => {
   const [projects] = useState([
@@ -19,26 +18,26 @@ const Projects = () => {
       image: gymnexImage,
       highlights: ['AI-Powered Recommendations', 'Real-time Sync', 'Secure Auth', 'Beautiful UI']
     },
-    {
-      id: 2,
-      title: 'API Gateway Service',
-      description: 'High-performance API gateway built with FastAPI. Includes rate limiting, authentication, and microservices orchestration.',
-      tech: ['FastAPI', 'MongoDB', 'Docker', 'Redis'],
-      github: 'https://github.com/SHIVA-SINGHx',
-      live: '#',
-      gradient: 'from-cyan-600 to-blue-600',
-      image: null
-    },
-    {
-      id: 3,
-      title: 'DevOps Dashboard',
-      description: 'Real-time monitoring dashboard for cloud infrastructure. Features deployment tracking, resource monitoring, and automated alerts.',
-      tech: ['React', 'FastAPI', 'AWS', 'Docker'],
-      github: 'https://github.com/SHIVA-SINGHx',
-      live: '#',
-      gradient: 'from-blue-500 to-cyan-500',
-      image: null
-    }
+    // {
+    //   id: 2,
+    //   title: 'API Gateway Service',
+    //   description: 'High-performance API gateway built with FastAPI. Includes rate limiting, authentication, and microservices orchestration.',
+    //   tech: ['FastAPI', 'MongoDB', 'Docker', 'Redis'],
+    //   github: 'https://github.com/SHIVA-SINGHx',
+    //   live: '#',
+    //   gradient: 'from-cyan-600 to-blue-600',
+    //   image: null
+    // },
+    // {
+    //   id: 3,
+    //   title: 'DevOps Dashboard',
+    //   description: 'Real-time monitoring dashboard for cloud infrastructure. Features deployment tracking, resource monitoring, and automated alerts.',
+    //   tech: ['React', 'FastAPI', 'AWS', 'Docker'],
+    //   github: 'https://github.com/SHIVA-SINGHx',
+    //   live: '#',
+    //   gradient: 'from-blue-500 to-cyan-500',
+    //   image: null
+    // }
   ]);
 
   return (

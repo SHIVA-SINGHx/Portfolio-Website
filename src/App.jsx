@@ -5,28 +5,15 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Blog from "./components/Blog";
-import BlogDetail from "./components/BlogDetail";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 
 
 const App = () => {
   const [currentView, setCurrentView] = useState('home');
-  const [selectedBlog, setSelectedBlog] = useState(null);
 
-  const handleReadMore = (blog) => {
-    setSelectedBlog(blog);
-    setCurrentView('blog-detail');
-    window.scrollTo(0, 0);
-  };
 
-  const handleBackToBlog = () => {
-    setCurrentView('home');
-    setSelectedBlog(null);
-    setTimeout(() => {
-      document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
+
 
   return (
     <div className="min-h-screen bg-black">
@@ -39,12 +26,12 @@ const App = () => {
           </div>
           <Skills/>
           <Projects />
-          <Blog onReadMore={handleReadMore} />
+          <Blog/>
           <Contact />
           <Footer />
         </>
       ) : (
-        <BlogDetail blog={selectedBlog} onBack={handleBackToBlog} />
+       nothing
       )}
       
       <style jsx>{`
