@@ -25,7 +25,7 @@ const Hero = () => {
   const roles = [
     "Full Stack Developer",
     "MERN Stack Expert",
-    "Django Developer",
+    "Python Developer",
     "Open Source Contributor",
     "Cloud Enthusiast",
   ];
@@ -103,10 +103,10 @@ const Hero = () => {
         </div>
 
         <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 animate-fade-in-up leading-relaxed">
-          Passionate full-stack developer specializing in MERN stack and Django,
-          with expertise in microservices architecture, cloud technologies, and
+          Passionate full-stack developer specializing in MERN stack, Django & FastApi
+          with the great understanding of cloud technologies and
           DevOps practices. Open source contributor and freelance developer
-          ready to bring your ideas to life.
+          ready to bring your ideas to life. And I'm exprloring Microservices architecture and deep dive into
         </p>
 
         <div className="flex gap-6 justify-center animate-fade-in-up-delayed">

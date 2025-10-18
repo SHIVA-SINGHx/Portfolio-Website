@@ -5,9 +5,9 @@ import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, S
   const [projects] = useState([
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce platform built with Django, PostgreSQL, and Next.js. Features include payment integration, inventory management, and real-time updates.',
-      tech: ['Django', 'Next.js', 'PostgreSQL', 'Redis'],
+      title: 'Gymnex',
+      description: 'Gynmex is full-stack AI-Powered fitness assistant that help will help you to manage your fitness goal.',
+      tech: ['Next.js','Gemini-Api','MongoDB', 'Clerk', 'Shadcn-Ui'],
       github: 'https://github.com/SHIVA-SINGHx',
       live: '#',
       gradient: 'from-blue-600 to-cyan-600'
