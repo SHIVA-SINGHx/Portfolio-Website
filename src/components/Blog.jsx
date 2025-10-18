@@ -5,34 +5,34 @@ const Blog = ({ onReadMore }) => {
   const [blogs] = useState([
     {
       id: 1,
-      title: 'Building Scalable APIs with FastAPI',
-      excerpt: 'Learn how to build high-performance REST APIs using FastAPI, including best practices for authentication, validation, and async operations.',
-      date: '2024-10-01',
+      title: 'How to Create a Django Project on Windows',
+      excerpt: 'Django is a Python-based web framework that is used for powerful and fast development. If you want to create a Django project on Windows, then follow the steps given below.',
+      date: '2025-10-10',
       author: 'Shiva',
-      readTime: '8 min read',
-      tags: ['FastAPI', 'Python', 'Backend'],
+      readTime: '15 min read',
+      tags: ['Django', 'Python', 'Backend',],
   
       
     },
     {
       id: 2,
-      title: 'PostgreSQL vs MongoDB: Choosing the Right Database',
-      excerpt: 'A comprehensive comparison of PostgreSQL and MongoDB, helping you make informed decisions for your next project.',
-      date: '2024-09-28',
+      title: 'Why Every Begineer Should Learn Numpy?',
+      excerpt: "NumPy is a Python library used to perform fast and powerful mathematical operations with arrays.It’s used in fields like data science, machine learning, image processing, and statistics.",
+      date: '2025-10-07',
       author: 'Shiva',
       readTime: '10 min read',
-      tags: ['Database', 'PostgreSQL', 'MongoDB'],
+      tags: ['Nmpy', 'Python', 'Jupyter'],
     
       
     },
     {
       id: 3,
-      title: 'DevOps Best Practices for 2024',
-      excerpt: 'Essential DevOps practices every developer should know, from CI/CD pipelines to container orchestration.',
-      date: '2024-09-25',
+      title: 'What is Linux & Ubuntu? Learn Linux and his Command On Windows',
+      excerpt: 'Linux is an operating system or rather a brain that controls everything inside your computer.',
+      date: '2025-10-18',
       author: 'Shiva',
-      readTime: '12 min read',
-      tags: ['DevOps', 'Docker', 'CI/CD'],
+      readTime: '20',
+      tags: ['Linux', 'Operating-System', 'DevOps', 'Docker',],
  
     }
   ]);
@@ -89,7 +89,7 @@ const Blog = ({ onReadMore }) => {
                     onClick={() => onReadMore(blog)}
                     className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors font-semibold group/btn"
                   >
-                    <a href="https://gymnex.vercel.app/">Read More</a>
+                    <a href="https://medium.com/@shivasingh.1dev">Read More</a>
                     
                     <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
