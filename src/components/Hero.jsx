@@ -80,7 +80,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 z-10 text-center">
         <div className="mb-8 animate-scale-in">
-          <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-500  to-blue-600 p-1 relative group">
+          <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-gradient-to-br p-1 relative group">
             <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-6xl font-bold text-white group-hover:scale-110 transition-transform duration-300 overflow-hidden">
               <img src={pfp} alt="" />
             </div>
