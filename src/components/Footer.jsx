@@ -18,7 +18,7 @@ const Footer = () => {
           {/* Brand & Status */}
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="font-mono text-sm font-semibold text-white">shiva.dev</span>
+            <span className="font-mono text-sm font-semibold text-white">Shiva</span>
             <span className="text-xs font-mono text-zinc-400">
               · Full Stack & Cloud/DevOps Engineer
             </span>

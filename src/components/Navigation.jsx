@@ -38,7 +38,7 @@ const Navigation = ({ onOpenResume }) => {
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span className="font-mono text-sm tracking-tight font-medium text-white group-hover:text-zinc-300 transition-colors">
-            shiva
+            Shiva
           </span>
         </a>
 

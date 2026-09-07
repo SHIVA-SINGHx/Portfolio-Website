@@ -115,7 +115,7 @@ const Contact = () => {
                 </p>
                 <div className="space-y-1 mb-4 text-xs font-mono text-zinc-400">
                   <p className="flex items-center gap-1.5 text-zinc-300">
-                    <MapPin className="w-3.5 h-3.5 text-zinc-500" /> Delhi, India
+                    <MapPin className="w-3.5 h-3.5 text-zinc-500" /> Remote
                   </p>
                 </div>
               </div>
