@@ -1,101 +1,126 @@
-import { useState } from "react";
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, Server, ChevronRight, Calendar, User, Terminal, Layout, Boxes, GitBranch } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Calendar, Clock, ArrowUpRight, BookOpen } from "lucide-react";
 
-const Blog = ({ onReadMore }) => {
-  const [blogs] = useState([
+const Blog = () => {
+  const articles = [
     {
       id: 1,
-      title: 'How to Create a Django Project on Windows',
-      excerpt: 'Django is a Python-based web framework that is used for powerful and fast development. If you want to create a Django project on Windows, then follow the steps given below.',
-      date: '2025-10-10',
-      author: 'Shiva',
-      readTime: '15 min read',
-      tags: ['Django', 'Python', 'Backend',],
-  
-      
+      title: "How to Create a Django Project on Windows",
+      excerpt:
+        "Comprehensive step-by-step developer tutorial covering Python virtual environments, pip dependencies, Django project creation, and local server startup on Windows.",
+      date: "Oct 2025",
+      readTime: "15 min read",
+      tags: ["Django", "Python", "Backend"],
+      url: "https://medium.com/@shivasingh.1dev",
     },
     {
       id: 2,
-      title: 'Why Every Begineer Should Learn Numpy?',
-      excerpt: "NumPy is a Python library used to perform fast and powerful mathematical operations with arrays.It’s used in fields like data science, machine learning, image processing, and statistics.",
-      date: '2025-10-07',
-      author: 'Shiva',
-      readTime: '10 min read',
-      tags: ['Nmpy', 'Python', 'Jupyter'],
-    
-      
+      title: "Why Every Beginner Should Learn NumPy",
+      excerpt:
+        "An intuitive breakdown of vectorized numerical computing, multi-dimensional array manipulation, and memory optimization with NumPy for modern Python developers.",
+      date: "Oct 2025",
+      readTime: "10 min read",
+      tags: ["NumPy", "Python", "Data Science"],
+      url: "https://medium.com/@shivasingh.1dev",
     },
     {
       id: 3,
-      title: 'What is Linux & Ubuntu? Learn Linux and his Command On Windows',
-      excerpt: 'Linux is an operating system or rather a brain that controls everything inside your computer.',
-      date: '2025-10-18',
-      author: 'Shiva',
-      readTime: '20',
-      tags: ['Linux', 'Operating-System', 'DevOps', 'Docker',],
- 
-    }
-  ]);
+      title: "What is Linux & Ubuntu? Terminal & Commands for Windows Devs",
+      excerpt:
+        "Demystifying the Linux kernel, core shell scripting utilities, file permissions, and environment setup for developers bridging the gap between Windows and Linux cloud hosts.",
+      date: "Oct 2025",
+      readTime: "20 min read",
+      tags: ["Linux", "DevOps", "Docker", "Terminal"],
+      url: "https://medium.com/@shivasingh.1dev",
+    },
+  ];
 
   return (
-    <section className="py-24 bg-black" id="blog">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            Latest <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Blog Posts</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Sharing my knowledge and experiences in web development, databases, and DevOps.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog, index) => (
-            <div 
-              key={blog.id}
-              className="group relative"
-              style={{ animationDelay: `${index * 100}ms` }}
+    <section id="articles" className="py-16 md:py-20 border-b border-zinc-900">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8"
+        >
+          <div>
+            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-1">
+              Publications & Writing
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Technical Writing
+            </h2>
+          </div>
+
+          <a
+            href="https://medium.com/@shivasingh.1dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-white transition-colors"
+          >
+            <span>5+ Articles on Medium</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        </motion.div>
+
+        {/* Articles Grid with Motion */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {articles.map((article, idx) => (
+            <motion.a
+              key={article.id}
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: idx * 0.08 }}
+              whileHover={{ y: -3 }}
+              className="p-5 sm:p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all duration-300 flex flex-col justify-between group"
             >
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-500 rounded-2xl"></div>
-              
-              {/* Card */}
-              <div className="relative bg-gray-950 rounded-2xl overflow-hidden border border-gray-800 group-hover:border-cyan-500 transition-all duration-500 transform group-hover:scale-105 h-full flex flex-col">
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </div>
-                    <span>•</span>
-                    <span>{blog.readTime}</span>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors line-clamp-2">
-                    {blog.title}
-                  </h3>
-                  
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed line-clamp-3 flex-1">{blog.excerpt}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {blog.tags.map((tag, i) => (
-                      <span key={i} className="px-3 py-1 bg-gray-900 text-cyan-400 text-xs rounded-full border border-gray-800">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <button 
-                    onClick={() => onReadMore(blog)}
-                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors font-semibold group/btn"
-                  >
-                    <a href="https://medium.com/@shivasingh.1dev">Read More</a>
-                    
-                    <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+              <div>
+                <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3 h-3" /> {article.date}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" /> {article.readTime}
+                  </span>
+                </div>
+
+                <h3 className="text-base font-semibold text-white group-hover:text-zinc-200 transition-colors mb-2 leading-snug">
+                  {article.title}
+                </h3>
+
+                <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3 mb-4">
+                  {article.excerpt}
+                </p>
+              </div>
+
+              <div>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-850 text-[10px] font-mono text-zinc-400"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="pt-3 border-t border-zinc-900 flex items-center justify-between text-xs font-mono text-zinc-400 group-hover:text-white transition-colors">
+                  <span className="flex items-center gap-1.5">
+                    <BookOpen className="w-3.5 h-3.5" /> Read on Medium
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </div>
-            </div>
+            </motion.a>
           ))}
         </div>
       </div>
@@ -103,4 +128,4 @@ const Blog = ({ onReadMore }) => {
   );
 };
 
-export default Blog
+export default Blog;

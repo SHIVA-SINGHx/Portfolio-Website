@@ -1,56 +1,105 @@
-import { useEffect, useState } from "react";
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, Server, ChevronRight, Calendar, User, Terminal, Layout, Boxes, GitBranch } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Menu, X, FileText } from "lucide-react";
 
-const Navigation = ({ currentView }) => {
+const Navigation = ({ onOpenResume }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (currentView === 'blog-detail') return null;
+  const navLinks = [
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Stack", href: "#stack" },
+    { name: "Writing", href: "#articles" },
+    { name: "Contact", href: "#contact" },
+  ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-lg border-b border-gray-800 shadow-lg' : 'bg-transparent'}`}>
-      <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
-            Portfolio
-          </div>
-          
-          <div className="hidden md:flex gap-8">
-            <a href="#home" className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Home</a>
-            <a href="#skills" className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Skills</a>
-            <a href="#projects" className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Projects</a>
-            <a href="#blog" className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Blog</a>
-            <a href="#contact" className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Contact</a>
-          </div>
-          
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white">
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
+        scrolled
+          ? "bg-black/85 backdrop-blur-md border-b border-zinc-900 py-3.5 shadow-sm"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
+        {/* Brand / Logo */}
+        <a
+          href="#about"
+          className="group flex items-center gap-2.5 text-zinc-200 hover:text-white transition-colors"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="font-mono text-sm tracking-tight font-medium text-white group-hover:text-zinc-300 transition-colors">
+            shiva
+          </span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6 text-xs font-mono tracking-wide text-zinc-400">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="hover:text-white transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+
+          <button
+            onClick={onOpenResume}
+            className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono text-zinc-200 bg-zinc-900 hover:bg-white hover:text-black border border-zinc-800 hover:border-white rounded-md transition-all duration-200"
+          >
+            <FileText className="w-3 h-3" />
+            <span>Resume</span>
+          </button>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={onOpenResume}
+            className="px-2.5 py-1 text-xs font-mono text-zinc-200 bg-zinc-900 border border-zinc-800 rounded-md"
+          >
+            Resume
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-1 text-zinc-400 hover:text-white"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-        
-        {isOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col gap-4">
-              <a href="#home" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Home</a>
-              <a href="#skills" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Skills</a>
-              <a href="#projects" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Projects</a>
-              <a href="#blog" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Blog</a>
-              <a href="#contact" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Contact</a>
-            </div>
-          </div>
-        )}
       </div>
-    </nav>
+
+      {/* Mobile Menu Drawer */}
+      {isOpen && (
+        <div className="md:hidden border-b border-zinc-900 bg-black/95 backdrop-blur-lg px-6 py-4">
+          <div className="flex flex-col gap-3 text-sm font-mono text-zinc-400">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="py-1 hover:text-white transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
-export default Navigation
+export default Navigation;

@@ -1,143 +1,235 @@
-import { useState } from "react";
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Database, Cloud, Server, ChevronRight, Calendar, User, Terminal, Layout, Boxes, GitBranch } from 'lucide-react';
-
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Cloud, Layout, Database, Terminal, Cpu, Layers, GitBranch, Code } from "lucide-react";
 
 const Skills = () => {
-  const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [activeTab, setActiveTab] = useState("all");
 
-  const skills = [
+  const skillCategories = [
     {
-      category: 'Backend',
-      icon: <Server className="w-8 h-8" />,
-      color: 'from-blue-500 to-cyan-500',
-      items: [
-        { name: 'Django', level: 90 },
-        { name: 'FastAPI', level: 85 },
-        { name: 'Python', level: 92 },
-        { name: 'REST APIs', level: 88 }
-      ]
+      id: "devops",
+      title: "DevOps & Infrastructure",
+      subtitle: "Containers, CI/CD, Linux & Cloud",
+      icon: <Cloud className="w-4 h-4 text-zinc-300" />,
+      tag: "Cloud / Infra",
+      skills: [
+        { name: "Docker", highlight: true },
+        { name: "AWS (EC2, VPC, RDS)", highlight: true },
+        { name: "CI/CD & GitHub Actions", highlight: true },
+        { name: "Linux Administration", highlight: true },
+        { name: "NGINX Reverse Proxy", highlight: false },
+        { name: "Git & GitHub", highlight: true },
+        { name: "Vercel Deployment", highlight: false },
+        { name: "Infrastructure Automation", highlight: false },
+      ],
+      description:
+        "Building multi-stage Docker containers to reduce deployment latency, provisioning AWS EC2 instances, setting up NGINX proxies, and automating tests via GitHub Actions.",
     },
     {
-      category: 'Frontend',
-      icon: <Layout className="w-8 h-8" />,
-      color: 'from-cyan-500 to-blue-500',
-      items: [
-        { name: 'Next.js', level: 85 },
-        { name: 'React', level: 90 },
-        { name: 'Tailwind CSS', level: 88 },
-        { name: 'JavaScript', level: 87 }
-      ]
+      id: "backend",
+      title: "Backend & AI Engineering",
+      subtitle: "APIs, Microservices, Python & LLMs",
+      icon: <Cpu className="w-4 h-4 text-zinc-300" />,
+      tag: "Server / AI",
+      skills: [
+        { name: "FastAPI", highlight: true },
+        { name: "Python", highlight: true },
+        { name: "Google Gemini API", highlight: true },
+        { name: "Node.js & Express.js", highlight: true },
+        { name: "Django & Flask", highlight: false },
+        { name: "Pydantic & Swagger-UI", highlight: false },
+        { name: "NumPy & Pandas", highlight: false },
+        { name: "JWT Authentication", highlight: true },
+      ],
+      description:
+        "Developing asynchronous REST APIs with FastAPI, building Node/Express backends, integrating Google Gemini AI workflows, and writing data processing routines.",
     },
     {
-      category: 'Database',
-      icon: <Database className="w-8 h-8" />,
-      color: 'from-blue-600 to-cyan-600',
-      items: [
-        { name: 'PostgreSQL', level: 85 },
-        { name: 'MongoDB', level: 82 },
-        { name: 'Redis', level: 78 },
-        { name: 'SQL', level: 88 }
-      ]
+      id: "frontend",
+      title: "Frontend & UI Systems",
+      subtitle: "Modern Component Architecture",
+      icon: <Layout className="w-4 h-4 text-zinc-300" />,
+      tag: "Client Web",
+      skills: [
+        { name: "React.js", highlight: true },
+        { name: "Next.js", highlight: true },
+        { name: "TypeScript", highlight: true },
+        { name: "JavaScript", highlight: true },
+        { name: "Tailwind CSS", highlight: true },
+        { name: "Shadcn-UI", highlight: true },
+        { name: "Redux Toolkit", highlight: false },
+        { name: "Framer Motion", highlight: false },
+      ],
+      description:
+        "Designing responsive, accessible web interfaces with Next.js, React, and Tailwind CSS. Implementing state management with Redux Toolkit and modern component systems with Shadcn-UI.",
     },
     {
-      category: 'DevOps/Cloud',
-      icon: <Cloud className="w-8 h-8" />,
-      color: 'from-cyan-600 to-blue-600',
-      items: [
-        { name: 'Docker', level: 85 },
-        { name: 'AWS', level: 80 },
-        { name: 'CI/CD', level: 82 },
-        { name: 'Linux', level: 87 }
-      ]
-    }
+      id: "database",
+      title: "Databases, ORM & Languages",
+      subtitle: "Persistence, Caching & Core Languages",
+      icon: <Database className="w-4 h-4 text-zinc-300" />,
+      tag: "Data & Core",
+      skills: [
+        { name: "PostgreSQL", highlight: true },
+        { name: "MongoDB & Mongoose", highlight: true },
+        { name: "MySQL", highlight: false },
+        { name: "Redis Caching", highlight: true },
+        { name: "SQLAlchemy & Prisma ORM", highlight: false },
+        { name: "Golang Basics", highlight: false },
+        { name: "SQL", highlight: true },
+      ],
+      description:
+        "Managing relational datasets with PostgreSQL/MySQL and document stores with MongoDB. Caching frequent queries with Redis and modeling schemas via Prisma and SQLAlchemy.",
+    },
   ];
 
-  return (
-    <section className="py-24 bg-black relative overflow-hidden" id="skills">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.3) 1px, transparent 1px)',
-          backgroundSize: '30px 30px'
-        }}></div>
-      </div>
+  const filteredCategories =
+    activeTab === "all"
+      ? skillCategories
+      : skillCategories.filter((c) => c.id === activeTab);
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-slide-up">
-            Skills & <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Expertise</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Technologies and tools I use to bring ideas to life
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {skills.map((skill, index) => (
-            <div 
-              key={index}
-              onMouseEnter={() => setHoveredSkill(index)}
-              onMouseLeave={() => setHoveredSkill(null)}
-              className="group relative"
-              style={{ animationDelay: `${index * 100}ms` }}
+  return (
+    <section id="stack" className="py-16 md:py-20 border-b border-zinc-900">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8"
+        >
+          <div>
+            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-1">
+              Capabilities & Tools
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Tech Stack
+            </h2>
+          </div>
+
+          {/* Quick Filter */}
+          <div className="inline-flex p-1 rounded-lg bg-zinc-950 border border-zinc-800 text-xs font-mono">
+            <button
+              onClick={() => setActiveTab("all")}
+              className={`px-3 py-1 rounded-md transition-all ${
+                activeTab === "all"
+                  ? "bg-zinc-800 text-white font-medium"
+                  : "text-zinc-400 hover:text-zinc-200"
+              }`}
             >
-              {/* Glow Effect */}
-              <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-2xl`}></div>
-              
-              {/* Card */}
-              <div className="relative bg-gray-950 p-8 rounded-2xl border border-gray-800 group-hover:border-cyan-500 transition-all duration-500 transform group-hover:scale-105 group-hover:-translate-y-2 h-full">
-                {/* Icon with Gradient Background */}
-                <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${skill.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <div className="text-white">
-                    {skill.icon}
-                  </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-white mb-6">{skill.category}</h3>
-                
-                {/* Skill Items with Progress Bars */}
-                <div className="space-y-4">
-                  {skill.items.map((item, i) => (
-                    <div key={i} className="group/item">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-300 font-medium">{item.name}</span>
-                        <span className="text-cyan-400 text-sm font-semibold">{item.level}%</span>
-                      </div>
-                      {/* Progress Bar */}
-                      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out`}
-                          style={{ 
-                            width: hoveredSkill === index ? `${item.level}%` : '0%',
-                            transitionDelay: `${i * 100}ms`
-                          }}
-                        ></div>
-                      </div>
+              All
+            </button>
+            <button
+              onClick={() => setActiveTab("devops")}
+              className={`px-3 py-1 rounded-md transition-all ${
+                activeTab === "devops"
+                  ? "bg-zinc-800 text-white font-medium"
+                  : "text-zinc-400 hover:text-zinc-200"
+              }`}
+            >
+              DevOps
+            </button>
+            <button
+              onClick={() => setActiveTab("backend")}
+              className={`px-3 py-1 rounded-md transition-all ${
+                activeTab === "backend"
+                  ? "bg-zinc-800 text-white font-medium"
+                  : "text-zinc-400 hover:text-zinc-200"
+              }`}
+            >
+              Backend & AI
+            </button>
+            <button
+              onClick={() => setActiveTab("frontend")}
+              className={`px-3 py-1 rounded-md transition-all ${
+                activeTab === "frontend"
+                  ? "bg-zinc-800 text-white font-medium"
+                  : "text-zinc-400 hover:text-zinc-200"
+              }`}
+            >
+              Frontend
+            </button>
+          </div>
+        </motion.div>
+
+        {/* 2x2 Clean Monochrome Grid with Motion */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {filteredCategories.map((cat, idx) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: idx * 0.05 }}
+              whileHover={{ y: -3 }}
+              className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                {/* Card Header */}
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 group-hover:border-zinc-700 transition-colors">
+                      {cat.icon}
                     </div>
+                    <div>
+                      <h3 className="text-base font-semibold text-white group-hover:text-zinc-200 transition-colors">
+                        {cat.title}
+                      </h3>
+                      <p className="text-[11px] font-mono text-zinc-400">
+                        {cat.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                    {cat.tag}
+                  </span>
+                </div>
+
+                {/* Brief description */}
+                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                  {cat.description}
+                </p>
+              </div>
+
+              {/* Skills Tags */}
+              <div className="pt-3 border-t border-zinc-900">
+                <div className="flex flex-wrap gap-1.5">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill.name}
+                      className={`px-2.5 py-1 rounded-md text-xs font-mono transition-colors ${
+                        skill.highlight
+                          ? "bg-zinc-900 text-zinc-200 border border-zinc-700 font-medium"
+                          : "bg-zinc-900/60 text-zinc-400 border border-zinc-850"
+                      }`}
+                    >
+                      {skill.name}
+                    </span>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Additional Skills Tags */}
-        <div className="mt-16 text-center">
-          <p className="text-gray-400 mb-6">Also experienced with:</p>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {['Git', 'GitHub Actions', 'Nginx', 'GraphQL', 'WebSockets', 'Celery', 'RabbitMQ', 'Kubernetes', 'Terraform'].map((tech, i) => (
-              <span 
-                key={i} 
-                className="px-6 py-2 bg-gray-900 text-cyan-400 rounded-full border border-gray-800 hover:border-cyan-500 hover:bg-gray-800 transition-all transform hover:scale-105 cursor-default"
-              >
-                {tech}
-              </span>
-            ))}
+        {/* Languages & Environments Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mt-6 p-4 rounded-xl bg-zinc-950 border border-zinc-850 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-zinc-400"
+        >
+          <div className="flex items-center gap-2">
+            <Terminal className="w-4 h-4 text-zinc-400 shrink-0" />
+            <span>Languages: Python · JavaScript · TypeScript · Golang · SQL</span>
           </div>
-        </div>
+          <span className="text-zinc-400 text-[11px] shrink-0">Linux Ubuntu · Dockerized Workflow</span>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-export default Skills
+export default Skills;

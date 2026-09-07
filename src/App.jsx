@@ -1,116 +1,43 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
-import Footer from "./components/Footer";
-import Contact from "./components/Contact";
-import Blog from "./components/Blog";
+import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
-
+import Blog from "./components/Blog";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import ResumeModal from "./components/ResumeModal";
 
 const App = () => {
-  const [currentView, setCurrentView] = useState('home');
-
-
-
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navigation currentView={currentView} />
-      
-      {currentView === 'home' ? (
-        <>
-          <div id="home">
-            <Hero/>
-          </div>
-          <Skills/>
-          <Projects />
-          <Blog/>
-          <Contact />
-          <Footer />
-        </>
-      ) : (
-       nothing
-      )}
-      
-      <style jsx>{`
-        @keyframes scale-in {
-          from {
-            opacity: 0;
-            transform: scale(0.8);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
-        .animate-scale-in {
-          animation: scale-in 1s ease-out;
-        }
-        
-        .animate-slide-up {
-          animation: slide-up 0.8s ease-out;
-        }
-        
-        .animate-slide-up-delayed {
-          animation: slide-up 0.8s ease-out 0.3s backwards;
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out 0.5s backwards;
-        }
-        
-        .animate-fade-in-up-delayed {
-          animation: fade-in-up 0.8s ease-out 0.7s backwards;
-        }
-        
-        .animate-blink {
-          animation: blink 1s infinite;
-        }
-        
-        .animate-gradient {
-          background-size: 200% auto;
-          animation: gradient 3s linear infinite;
-        }
-      `}</style>
+    <div className="min-h-screen bg-black text-zinc-100 font-sans selection:bg-zinc-800 selection:text-white">
+      {/* Fixed Navigation */}
+      <Navigation onOpenResume={() => setIsResumeOpen(true)} />
+
+      {/* Main Content Sections */}
+      <main>
+        <Hero onOpenResume={() => setIsResumeOpen(true)} />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Blog />
+        <Contact />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Interactive Resume Modal */}
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
     </div>
   );
-}
+};
 
-
-export default App
+export default App;
