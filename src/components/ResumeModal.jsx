@@ -7,6 +7,10 @@ import {
   ExternalLink,
   FileText,
   Eye,
+  Mail,
+  MapPin,
+  Briefcase,
+  Award,
   Check,
 } from "lucide-react";
 
@@ -80,22 +84,20 @@ const ResumeModal = ({ isOpen, onClose }) => {
                 <div className="inline-flex p-0.5 rounded-lg bg-zinc-950 border border-zinc-800 text-xs font-mono">
                   <button
                     onClick={() => setViewMode("pdf")}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all ${
-                      viewMode === "pdf"
-                        ? "bg-zinc-800 text-white font-medium shadow-sm"
-                        : "text-zinc-400 hover:text-zinc-200"
-                    }`}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all ${viewMode === "pdf"
+                      ? "bg-zinc-800 text-white font-medium shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200"
+                      }`}
                   >
                     <FileText className="w-3 h-3" />
                     <span>PDF File</span>
                   </button>
                   <button
                     onClick={() => setViewMode("text")}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all ${
-                      viewMode === "text"
-                        ? "bg-zinc-800 text-white font-medium shadow-sm"
-                        : "text-zinc-400 hover:text-zinc-200"
-                    }`}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-all ${viewMode === "text"
+                      ? "bg-zinc-800 text-white font-medium shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200"
+                      }`}
                   >
                     <Eye className="w-3 h-3" />
                     <span>Structured</span>
@@ -152,7 +154,7 @@ const ResumeModal = ({ isOpen, onClose }) => {
                   />
                 </div>
               ) : (
-                /* High-fidelity structured resume text */
+                /* High-fidelity structured resume text matching Shiva's exact resume */
                 <div className="overflow-y-auto h-full p-6 sm:p-10 space-y-8 font-sans max-w-4xl mx-auto">
                   {/* Top Header */}
                   <div className="border-b border-zinc-800 pb-6 text-center sm:text-left">
@@ -309,34 +311,27 @@ const ResumeModal = ({ isOpen, onClose }) => {
                         </p>
                       </div>
 
-                      {/* Node.js App CI/CD Pipeline */}
+                      {/* Grokers */}
                       <div className="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800">
                         <div className="flex items-center justify-between gap-2 mb-1.5">
                           <h4 className="font-semibold text-white text-sm">
-                            Node.js App CI/CD Pipeline
+                            Grokers – Full-Stack Grocery Delivery App with Separate Admin section
                           </h4>
-                          <a
-                            href="https://github.com/SHIVA-SINGHx/node-app-pipeline"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1"
-                          >
-                            GitHub <ExternalLink className="w-3 h-3" />
-                          </a>
+                          <span className="text-xs font-mono text-zinc-400">GitHub</span>
                         </div>
                         <ul className="text-xs text-zinc-300 space-y-1 list-disc list-inside mb-2.5">
                           <li>
-                            End-to-end continuous integration and delivery pipeline with automated linting and unit testing.
+                            Built separate customer and admin interfaces: users can browse products and place orders, admins manage the catalog.
                           </li>
                           <li>
-                            Multi-stage Docker image builds with automated publishing to Docker Hub container registry.
+                            Architected role-based system with separate customer storefront and admin control panel managing 200+ products across categories.
                           </li>
                           <li>
-                            Zero-downtime automated deployment to remote Linux production servers via GitHub Actions.
+                            Secure authentication using JWT tokens with role-based access controlling admin-only features.
                           </li>
                         </ul>
                         <p className="text-[11px] font-mono text-zinc-400">
-                          <span className="text-zinc-200">Technologies Used:</span> Docker, GitHub Actions, Node.js, Linux, CI/CD, Docker Hub
+                          <span className="text-zinc-200">Technologies Used:</span> React.js, Prebuilt-UI, Node.js, Express.js, MongoDB, JWT, Cloudinary
                         </p>
                       </div>
 
@@ -361,31 +356,21 @@ const ResumeModal = ({ isOpen, onClose }) => {
                         </p>
                       </div>
 
-                      {/* Library Management System */}
+                      {/* Blog App */}
                       <div className="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800">
                         <div className="flex items-center justify-between gap-2 mb-1.5">
                           <h4 className="font-semibold text-white text-sm">
-                            Library Management System
+                            Blog App – Using FastAPI
                           </h4>
-                          <a
-                            href="https://github.com/SHIVA-SINGHx/Library-Management-System"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1"
-                          >
-                            GitHub <ExternalLink className="w-3 h-3" />
-                          </a>
+                          <span className="text-xs font-mono text-zinc-400">GitHub</span>
                         </div>
                         <ul className="text-xs text-zinc-300 space-y-1 list-disc list-inside mb-2.5">
                           <li>
-                            Modular object-oriented architecture implementing borrower accounts, book cataloging, and inventory states.
-                          </li>
-                          <li>
-                            Persistent SQL database queries with transactional tracking for checkouts, returns, and overdue calculations.
+                            Complete authentication system: users must login to create, edit, or delete their own blog posts.
                           </li>
                         </ul>
                         <p className="text-[11px] font-mono text-zinc-400">
-                          <span className="text-zinc-200">Technologies Used:</span> Python, SQL, Database Design, OOP Architecture, CLI
+                          <span className="text-zinc-200">Technologies Used:</span> FastAPI, PostgreSQL, SQLAlchemy ORM, JWT tokens, Swagger-UI
                         </p>
                       </div>
                     </div>

@@ -6,23 +6,23 @@ const Blog = () => {
   const articles = [
     {
       id: 1,
-      title: "How to Create a Django Project on Windows",
+      title: "Kubernetes Deployment Strategies Explained with Hands-On Examples",
       excerpt:
-        "Comprehensive step-by-step developer tutorial covering Python virtual environments, pip dependencies, Django project creation, and local server startup on Windows.",
-      date: "Oct 2025",
-      readTime: "15 min read",
-      tags: ["Django", "Python", "Backend"],
-      url: "https://medium.com/@shivasingh.1dev",
+        "Kubernetes gives us the primitives to control application rollouts. A Deployment manages ReplicaSets and Pods, and when the Pod template changes for example, when the container image changes Kubernetes can",
+      date: "Nov 2026",
+      readTime: "17 min read",
+      tags: ["Kubernetes", "DevOps", "Blue-Green Deployment", "Kubernetes Strategies"],
+      url: "https://medium.com/@shivasingh.1dev/kubernetes-deployment-strategies-explained-with-hands-on-examples-2c120c191426",
     },
     {
       id: 2,
-      title: "Why Every Beginner Should Learn NumPy",
+      title: "How a Modern CI/CD Pipeline Actually Works: From Local Code to Kubernetes Production",
       excerpt:
-        "An intuitive breakdown of vectorized numerical computing, multi-dimensional array manipulation, and memory optimization with NumPy for modern Python developers.",
-      date: "Oct 2025",
-      readTime: "10 min read",
-      tags: ["NumPy", "Python", "Data Science"],
-      url: "https://medium.com/@shivasingh.1dev",
+        "When you write code on your laptop, how does it securely and safely reach millions of users in production at top tech companies? Most tutorials make it look like a simple script running a couple of commands.",
+      date: "Oct 2026",
+      readTime: "6 min read",
+      tags: ["DevOps", "CI/CD", "Backend", "Kubernetes", "GitOps"],
+      url: "https://medium.com/@shivasingh.1dev/how-a-modern-ci-cd-pipeline-actually-works-from-local-code-to-kubernetes-production-b0b3a122481b",
     },
     {
       id: 3,

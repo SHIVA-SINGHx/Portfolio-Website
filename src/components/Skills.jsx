@@ -1,97 +1,303 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Cloud, Layout, Database, Terminal, Cpu, Layers, GitBranch, Code } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Cloud,
+  Terminal,
+  Server,
+  ShieldCheck,
+  Activity,
+  Layers,
+  Database,
+  CheckCircle2,
+} from "lucide-react";
+
+// Official Brand Logos (Clean Inline SVGs)
+const TechLogos = {
+  Docker: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#2496ED">
+      <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.186.186 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z" />
+    </svg>
+  ),
+  Kubernetes: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#326CE5">
+      <path d="M12 0L1.75 5.92v12.16L12 24l10.25-5.92V5.92L12 0zm0 2.21l8.34 4.82v9.94L12 21.79l-8.34-4.82V7.03L12 2.21zm.05 4.39a5.4 5.4 0 00-5.4 5.4c0 .87.21 1.7.58 2.43l1.83-1.06a3.27 3.27 0 01-.28-1.37 3.27 3.27 0 013.27-3.27c.48 0 .94.1 1.35.29l1.06-1.84a5.43 5.43 0 00-2.41-.58zm2.98 1.72l-1.06 1.83c.83.5 1.44 1.31 1.7 2.27l2.06-.55a5.41 5.41 0 00-2.7-3.55zm-7.65 3.32a5.4 5.4 0 00-.23 1.56c0 1.25.42 2.4 1.14 3.32l1.69-1.27a3.27 3.27 0 01-.69-2.05c0-.28.04-.55.1-.8l-2.01-.76zm9.32.7l-2.04.54c.05.25.07.51.07.78 0 .8-.29 1.54-.78 2.11l1.62 1.36a5.37 5.37 0 001.13-4.79zm-4.7 1.86a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4zm-2.88 1.85l-1.63 1.36c.92.83 2.12 1.34 3.44 1.34.62 0 1.21-.11 1.76-.3l-.78-2.01a3.28 3.28 0 01-.98.17c-.71 0-1.36-.23-1.81-.56z" />
+    </svg>
+  ),
+  Terraform: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#844FBA">
+      <path d="M15.47 2.235L9.53 5.666v6.855l5.942-3.43V2.235zM.001 6.421v6.856l5.942 3.43V9.85L.001 6.42zm8.59 14.343l5.942 3.43V17.34l-5.942-3.432v6.856zM16.41 9.85v6.856l5.942-3.43V6.42L16.41 9.85z" />
+    </svg>
+  ),
+  Ansible: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#EE0000">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm2.313 17.025l-3.09-7.552-3.337 4.785H6.218l4.605-6.608 3.588 8.683-2.098.692z" />
+    </svg>
+  ),
+  AWS: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#FF9900">
+      <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 01-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 01-.287-.375 6.18 6.18 0 01-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 01-.28.104.488.488 0 01-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 01.224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 011.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 00-.735-.136 6.02 6.02 0 00-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 01-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 01.32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 01.311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 01-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 01-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 01-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.503 0 .894-.088 1.165-.264a.86.86 0 00.415-.758.777.777 0 00-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 01-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 01.24.2.43.43 0 01.071.263v.375c0 .168-.064.256-.184.256a.83.83 0 01-.303-.096 3.652 3.652 0 00-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.743.167-1.158.167z" />
+    </svg>
+  ),
+  Azure: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#0089D6">
+      <path d="M13.483 0a1.29 1.29 0 0 0-.978.46L5.59 8.688a1.293 1.293 0 0 0 .19 1.838l4.49 3.593-7.852 7.853A1.29 1.29 0 0 0 3.33 24h6.05c.44 0 .85-.22 1.1-.59l7.07-10.608 4.04 3.23a1.29 1.29 0 0 0 2.05-.72L24 1.29A1.29 1.29 0 0 0 22.71 0h-9.227z" />
+    </svg>
+  ),
+  GitHubActions: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#2088FF">
+      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+    </svg>
+  ),
+  Jenkins: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#D33833">
+      <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 2.18c5.42 0 9.82 4.4 9.82 9.82 0 5.42-4.4 9.82-9.82 9.82-5.42 0-9.82-4.4-9.82-9.82C2.18 6.58 6.58 2.18 12 2.18zm-1.09 3.27c-2.4 0-4.36 1.96-4.36 4.36 0 1.54.8 2.89 2.01 3.66v2.33c0 .6.49 1.09 1.09 1.09h2.51c.6 0 1.09-.49 1.09-1.09v-2.34c1.2-.76 1.99-2.11 1.99-3.65 0-2.4-1.93-4.36-4.33-4.36zm0 1.64c1.5 0 2.73 1.22 2.73 2.72 0 1.5-1.23 2.73-2.73 2.73-1.5 0-2.72-1.23-2.72-2.73 0-1.5 1.22-2.72 2.72-2.72z" />
+    </svg>
+  ),
+  Helm: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#0F1689">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 1.846a10.154 10.154 0 110 20.308A10.154 10.154 0 0112 1.846zm4.17 4.188l-1.44 2.49a3.6 3.6 0 00-1.73-.44 3.6 3.6 0 00-1.73.44l-1.44-2.49a6.44 6.44 0 013.17-.8 6.44 6.44 0 013.17.8zm-10.09 2.47l2.49 1.44a3.6 3.6 0 00-.44 1.73 3.6 3.6 0 00.44 1.73l-2.49 1.44a6.44 6.44 0 01-.8-3.17 6.44 6.44 0 01.8-3.17zm14.84 0a6.44 6.44 0 01.8 3.17 6.44 6.44 0 01-.8 3.17l-2.49-1.44a3.6 3.6 0 00.44-1.73 3.6 3.6 0 00-.44-1.73zM12 9.6a2.4 2.4 0 110 4.8 2.4 2.4 0 010-4.8zm-4.17 4.37l1.44 2.49a3.6 3.6 0 001.73.44 3.6 3.6 0 001.73-.44l1.44 2.49A6.44 6.44 0 0112 19.75a6.44 6.44 0 01-3.17-.8z" />
+    </svg>
+  ),
+  ArgoCD: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#EF7B4D">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.2a9.8 9.8 0 110 19.6A9.8 9.8 0 0112 2.2zm0 2.2a7.6 7.6 0 100 15.2 7.6 7.6 0 000-15.2zm0 2.2a5.4 5.4 0 110 10.8 5.4 5.4 0 010-10.8zm0 2.2a3.2 3.2 0 100 6.4 3.2 3.2 0 000-6.4z" />
+    </svg>
+  ),
+  Prometheus: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#E6522C">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4a9.6 9.6 0 110 19.2A9.6 9.6 0 0112 2.4zm-.48 2.16v7.44l-4.08 2.4.72 1.2 4.44-2.64h.84l4.44 2.64.72-1.2-4.08-2.4V4.56h-3.12z" />
+    </svg>
+  ),
+  Grafana: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#F46800">
+      <path d="M13.527.099C6.955-.744.942 3.9.099 10.473c-.843 6.572 3.8 12.584 10.373 13.428 6.573.843 12.587-3.801 13.428-10.374C24.744 6.955 20.101.943 13.527.099zm2.471 7.485a.855.855 0 01.593.25l1.76 1.76.593-.593a.263.263 0 01.37 0l.371.371a.263.263 0 010 .37l-1.863 1.863a.263.263 0 01-.37 0l-.371-.371a.263.263 0 010-.37l.593-.593-1.76-1.76a.855.855 0 010-1.206.855.855 0 01.084-.221zm-5.943.19c.472 0 .855.382.855.854a.855.855 0 01-.855.855.855.855 0 01-.854-.855c0-.472.382-.854.854-.854zm4.59 2.062a.855.855 0 01.593.25.855.855 0 010 1.206l-2.75 2.75a.855.855 0 01-1.206 0 .855.855 0 010-1.205l2.75-2.75a.855.855 0 01.613-.25z" />
+    </svg>
+  ),
+  SonarQube: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#4E9BCD">
+      <path d="M19.228 17.332a9.561 9.561 0 00-2.142-3.025 9.588 9.588 0 00-3.028-2.146 9.598 9.598 0 00-3.729-.748c-1.308 0-2.573.264-3.73.748A9.59 9.59 0 004.57 14.307a9.56 9.56 0 00-2.141 3.025A9.573 9.573 0 002 20.638h2.396c0-.866.169-1.706.503-2.499a7.17 7.17 0 011.606-2.27 7.157 7.157 0 012.267-1.608 7.17 7.17 0 012.557-.558v-2.398a9.6 9.6 0 00-3.729.748 9.59 9.59 0 00-3.028 2.147A9.56 9.56 0 002.428 17.33 9.572 9.572 0 002 20.638h2.396a7.218 7.218 0 01.503-2.498zM12 1.362a4.802 4.802 0 100 9.604 4.802 4.802 0 000-9.604zm0 7.207a2.405 2.405 0 110-4.81 2.405 2.405 0 010 4.81z" />
+    </svg>
+  ),
+  Trivy: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#1904DA">
+      <path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0zm0 2.4l8.4 4.8v9.6L12 21.6l-8.4-4.8V7.2L12 2.4z" />
+    </svg>
+  ),
+  Linux: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#FCC624">
+      <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587.595 1.34 1.3 2.303 1.624.973.316 2.064.44 2.996.025 1.506-.695 1.561-2.11 1.26-3.8l-.034-.214c-.3-2.003-.23-3.816.3-5.306-.988.504-2.07.44-3.21-.051-1.023-.063-2.158.169-3.3.198-1.028.274-2.17.276-3.14v-.025c-.003-.988-.076-1.95-.225-2.86-.152-.908-.38-1.753-.701-2.527C15.605.806 14.165 0 12.504 0zM8.5 15.5a.5.5 0 010 1 .5.5 0 010-1zm7 0a.5.5 0 010 1 .5.5 0 010-1z" />
+    </svg>
+  ),
+  NGINX: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#009639">
+      <path d="M12 0L1.605 6v12L12 24l10.395-6V6zm0 1.41l9.39 5.418v10.836L12 23.072 2.61 17.664V6.828zm0 2.526L4.564 8.414v7.172L12 20.064l7.436-4.478V8.414zm0 1.413l6.023 3.478v6.956L12 19.26l-6.023-3.477V8.827zm0 1.414l4.61 2.66v5.32L12 18.274l-4.61-2.654v-5.32z" />
+    </svg>
+  ),
+  Git: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#F05032">
+      <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.6-.401-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187" />
+    </svg>
+  ),
+  GitHub: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#FFFFFF">
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+    </svg>
+  ),
+  Python: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24">
+      <path
+        fill="#3776AB"
+        d="M11.91 0c-5.5 0-5.15 2.38-5.15 2.38l.01 2.47h5.24v.74H4.63S1.5 5.25 1.5 10.73c0 5.48 2.73 5.3 2.73 5.3h1.63v-2.3c0-2.64 2.29-2.58 2.29-2.58h5.23s2.2-.03 2.2-2.18V3.53S16.14 0 11.91 0zm-2.86 1.74a.8.8 0 11.01 1.6.8.8 0 01-.01-1.6z"
+      />
+      <path
+        fill="#FFD43B"
+        d="M12.09 24c5.5 0 5.15-2.38 5.15-2.38l-.01-2.47h-5.24v-.74h7.38s3.13.34 3.13-5.14c0-5.48-2.73-5.3-2.73-5.3h-1.63v2.3c0 2.64-2.29 2.58-2.29 2.58H10.65s-2.2.03-2.2 2.18v5.44S7.86 24 12.09 24zm2.86-1.74a.8.8 0 11-.01-1.6.8.8 0 01.01 1.6z"
+      />
+    </svg>
+  ),
+  Golang: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#00ADD8">
+      <path d="M1.811 10.231c-.047 0-.058-.023-.035-.058l.246-.315c.023-.035.081-.058.128-.058h4.172c.046 0 .058.035.035.07l-.199.303c-.023.036-.082.07-.117.07zM.047 11.306c-.047 0-.059-.023-.035-.058l.245-.316c.023-.035.082-.058.129-.058h5.328c.047 0 .07.035.058.07l-.093.28c-.012.047-.058.07-.105.07zm2.828 1.075c-.047 0-.059-.035-.035-.07l.163-.292c.023-.035.07-.07.117-.07h2.337c.047 0 .07.035.07.082l-.023.28c0 .047-.047.082-.082.082zm12.129-2.36c-.736.187-1.239.327-1.963.514-.176.046-.187.058-.34-.117-.174-.199-.303-.327-.548-.444-.737-.362-1.45-.257-2.115.175-.795.514-1.204 1.274-1.192 2.22.011.935.654 1.706 1.577 1.835.795.105 1.46-.175 1.987-.77.105-.13.198-.27.315-.434H10.47c-.245 0-.304-.152-.222-.35.152-.362.432-.97.596-1.274a.315.315 0 01.292-.187h4.253c-.023.316-.023.431-.058.747-.151 1.274-.643 2.455-1.519 3.403-1.274 1.39-2.828 1.846-4.465 1.413-1.52-.408-2.455-1.496-2.735-3.1-.316-1.754.316-3.4 1.636-4.65 1.228-1.157 2.7-1.52 4.288-1.075 1.11.316 1.858 1.027 2.221 2.093.082.199.047.316-.187.398zM21.818 11.4c-.8.187-1.577.374-2.359.584-.187.046-.199.058-.34-.152-.152-.21-.316-.362-.572-.467-1.075-.409-2.079-.082-2.887.772-.538.572-.782 1.25-.677 2.013.117.76.631 1.3 1.39 1.473.42.093.84.07 1.237-.082.408-.152.713-.409.924-.794h-.035l-1.52.012c-.21 0-.316-.152-.245-.35.082-.234.339-.714.397-.946a.315.315 0 01.292-.187h4.546c.023 0 .046.012.07.047-.094.584-.234 1.145-.432 1.69-.432 1.157-1.145 2.07-2.197 2.735-1.11.713-2.3.912-3.59.572-1.168-.316-2.009-1.088-2.313-2.278-.362-1.414-.07-2.76.794-3.956.98-1.368 2.302-2.056 3.99-1.986.88.035 1.683.292 2.302.912.117.117.222.245.339.374.047.012.047.035.082.117z" />
+    </svg>
+  ),
+  Bash: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#4EAA25">
+      <path d="M6.075 12.49L.19 8.093l-.171 10.825 6.056-2.388V12.49zm11.148 1.667L24 11.611l-6.777-4.308V14.157zm-5.826 4.428c-.49.144-.993.112-1.52-.11l-5.46 2.148.218.258 5.52.636c.544-.012 1.137-.3 1.242-.932zm0-11.52c-.107-.632-.698-.92-1.242-.932L4.634 6.77l-.218.258 5.46 2.147c.527-.221 1.03-.253 1.52-.11zm-2.165 1.218c-.46-.107-.943.009-1.282.419L2.44 11.994l5.51 3.292c.339.41.822.526 1.282.419V8.283zm4.33 7.434c.46.107.943-.009 1.282-.419l5.51-3.292-5.51-3.292c-.34-.41-.822-.526-1.282-.419v7.422z" />
+    </svg>
+  ),
+  Nodejs: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#339933">
+      <path d="M12 0l10.39 6v12L12 24 1.61 18V6L12 0zm0 2.21L3.52 7.12v9.76L12 21.79l8.48-4.91V7.12L12 2.21zM11.97 7.2c1.9 0 3.3.9 3.5 2.6h-2.1c-.1-.7-.6-1.1-1.4-1.1-.9 0-1.4.5-1.4 1.1 0 .6.4.9 1.9 1.3 2.1.5 3.3 1.3 3.3 3 0 1.9-1.5 2.9-3.5 2.9-2.1 0-3.6-1-3.7-2.8h2.2c.1.8.7 1.2 1.5 1.2.9 0 1.4-.5 1.4-1.2 0-.7-.5-1-2-1.4-2-.5-3.2-1.2-3.2-2.9 0-1.7 1.4-2.7 3-2.7z" />
+    </svg>
+  ),
+  FastAPI: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#009688">
+      <path d="M12 0C5.376 0 0 5.376 0 12c0 6.627 5.376 12 12 12 6.627 0 12-5.373 12-12 0-6.624-5.373-12-12-12zm-.624 21.624v-7.624H6l6.624-13.248v7.624H18L11.376 21.624z" />
+    </svg>
+  ),
+  PostgreSQL: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#336791">
+      <path d="M23.558 14.437c-.265-.336-1.088-.629-2.136-.51.097-2.158-.783-3.597-1.97-4.612.478-.667.93-1.52 1.138-2.645.398-2.156-.05-3.545-1.13-4.382-1.01-.789-2.4-1.045-4.074-.75-.875-2.386-2.306-2.986-3.315-3.253-1.006-.267-2.364-.184-3.432.405l-.038.02C8.105.606 7.043.271 5.918.331 4.748.394 3.754.988 3.184 2.007c-.568.996-.647 2.33-.203 3.746-1.529.74-2.538 2.116-2.842 3.935-.331 1.982.095 3.775 1.188 5.038.544.632 1.44 1.288 2.683 1.47-.302.731-.414 1.547-.27 2.415.308 1.864 1.567 3.235 3.435 3.731.525.141 1.084.21 1.67.21.938 0 1.942-.2.989-.357l.425-.17c.17.15.403.283.67.373.14.05.283.094.434.136v.002c0 .403.33.731.731.731h1.17c.285 0 .547-.168.67-.428l.52-1.078c1.268-.011 2.612-.263 3.33-.682l.547 1.074c.123.25.376.41.656.41h1.17c.398 0 .73-.326.73-.723 0-.037-.005-.075-.013-.11-.07-.374-.32-2.44-.35-3.532.67-.33 1.365-.837 1.907-1.549.967-1.272 1.363-2.957 1.075-4.474l-.005-.03z" />
+    </svg>
+  ),
+  MongoDB: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#47A248">
+      <path d="M12.005 24s-5.69-3.233-5.69-12.723C6.315 4.382 11.233.153 11.458 0c.226.153 5.144 4.382 5.144 11.277 0 9.49-4.597 12.723-4.597 12.723zM12 4.144c-.168 1.93-1.638 5.48-1.638 7.315 0 2.873 1.258 5.105 1.638 6.551.38-1.446 1.638-3.678 1.638-6.551 0-1.835-1.47-5.385-1.638-7.315z" />
+    </svg>
+  ),
+  Redis: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#DC382D">
+      <path d="M10.5 14.608L4.618 11.95 10.5 9.254l5.883 2.698zm-8.124-3.78L0 9.254v3.11l2.376 1.093zm19.248 0L24 9.254v3.11l-2.376 1.093zM10.5 15.75v3.11l5.883-2.698V13.05zm-8.124.598V13.05l2.376-1.093v3.11zm16.248.598V13.05l2.376-1.093v3.11zM10.5 20.148L4.618 17.45l5.882-2.699 5.883 2.7zM2.376 16.98L0 15.892v3.108l2.376 1.093zM24 15.892l-2.376 1.088v3.11L24 19.002zM10.5 21.24v3.108l5.883-2.698V18.54zm-8.124.597v-3.11l2.376 1.088v3.11zm19.248 0l-2.376-1.022v-3.11l2.376 1.088zM.432 7.5l10.068 4.62L20.568 7.5 10.5 2.88zm0 0" />
+    </svg>
+  ),
+  Kafka: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#231F20">
+      <path
+        fill="#FFFFFF"
+        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.07 16.59l-3.32-2.42c-.22.25-.49.46-.78.63v3.66h-1.94v-3.66c-.29-.17-.56-.38-.78-.63l-3.32 2.42-1.14-1.57 3.32-2.42c-.1-.31-.16-.64-.16-.99s.06-.68.16-.99l-3.32-2.42 1.14-1.57 3.32 2.42c.22-.25.49-.46.78-.63V4.76h1.94v3.66c.29.17.56.38.78.63l3.32-2.42 1.14 1.57-3.32 2.42c.1.31.16.64.16.99s-.06.68-.16.99l3.32 2.42-1.14 1.57z"
+      />
+    </svg>
+  ),
+  MySQL: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#00758F">
+      <path d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.274.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.134-.04-.045-.094-.06-.182-.158zM5.86 12.656c-.196.028-.325.064-.408.112-.082.055-.123.133-.122.236.004.1.057.161.16.197.067.025.14.037.218.037.08 0 .158-.018.236-.05.077-.033.14-.085.185-.162.047-.077.07-.17.07-.277V12.656h-.339zm12.1 2.065c-.188 0-.364.058-.524.172-.16.113-.29.26-.394.436-.104.177-.182.375-.236.59-.054.215-.08.433-.08.65 0 .226.026.449.079.665.052.217.133.41.244.578.11.168.248.302.413.4.165.098.355.147.569.147.21 0 .4-.047.566-.143.166-.095.305-.228.42-.398.113-.171.197-.367.253-.586.055-.22.082-.448.082-.681 0-.219-.026-.436-.077-.648-.052-.211-.131-.398-.24-.558-.108-.16-.245-.287-.413-.38-.168-.093-.358-.14-.57-.14v-.104l.002-.1z" />
+    </svg>
+  ),
+  Gemini: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#4285F4">
+      <path d="M12 24A14.304 14.304 0 000 12 14.304 14.304 0 0012 0a14.305 14.305 0 0012 12 14.305 14.305 0 00-12 12" />
+    </svg>
+  ),
+  TerminalCode: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" strokeWidth="2">
+      <polyline points="4 17 10 11 4 5" />
+      <line x1="12" y1="19" x2="20" y2="19" />
+    </svg>
+  ),
+  SecurityShield: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  ),
+  CloudServer: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+    </svg>
+  ),
+};
 
 const Skills = () => {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const skillCategories = [
+  // Purely DevOps, Cloud, DevSecOps, Observability, Infrastructure & Backend focused skills
+  const categories = [
+    {
+      id: "all",
+      name: "All Tech",
+      icon: <Layers className="w-3.5 h-3.5" />,
+    },
+    {
+      id: "cloud",
+      name: "Cloud & AWS",
+      icon: <Cloud className="w-3.5 h-3.5 text-amber-400" />,
+    },
     {
       id: "devops",
-      title: "DevOps & Infrastructure",
-      subtitle: "Containers, CI/CD, Linux & Cloud",
-      icon: <Cloud className="w-4 h-4 text-zinc-300" />,
-      tag: "Cloud / Infra",
-      skills: [
-        { name: "Docker", highlight: true },
-        { name: "AWS (EC2, VPC, RDS)", highlight: true },
-        { name: "CI/CD & GitHub Actions", highlight: true },
-        { name: "Linux Administration", highlight: true },
-        { name: "NGINX Reverse Proxy", highlight: false },
-        { name: "Git & GitHub", highlight: true },
-        { name: "Vercel Deployment", highlight: false },
-        { name: "Infrastructure Automation", highlight: false },
-      ],
-      description:
-        "Building multi-stage Docker containers to reduce deployment latency, provisioning AWS EC2 instances, setting up NGINX proxies, and automating tests via GitHub Actions.",
+      name: "DevOps & Containers",
+      icon: <Server className="w-3.5 h-3.5 text-blue-400" />,
+    },
+    {
+      id: "security",
+      name: "DevSecOps & Security",
+      icon: <ShieldCheck className="w-3.5 h-3.5 text-red-400" />,
+    },
+    {
+      id: "monitoring",
+      name: "Monitoring & Logs",
+      icon: <Activity className="w-3.5 h-3.5 text-orange-400" />,
     },
     {
       id: "backend",
-      title: "Backend & AI Engineering",
-      subtitle: "APIs, Microservices, Python & LLMs",
-      icon: <Cpu className="w-4 h-4 text-zinc-300" />,
-      tag: "Server / AI",
-      skills: [
-        { name: "FastAPI", highlight: true },
-        { name: "Python", highlight: true },
-        { name: "Google Gemini API", highlight: true },
-        { name: "Node.js & Express.js", highlight: true },
-        { name: "Django & Flask", highlight: false },
-        { name: "Pydantic & Swagger-UI", highlight: false },
-        { name: "NumPy & Pandas", highlight: false },
-        { name: "JWT Authentication", highlight: true },
-      ],
-      description:
-        "Developing asynchronous REST APIs with FastAPI, building Node/Express backends, integrating Google Gemini AI workflows, and writing data processing routines.",
-    },
-    {
-      id: "frontend",
-      title: "Frontend & UI Systems",
-      subtitle: "Modern Component Architecture",
-      icon: <Layout className="w-4 h-4 text-zinc-300" />,
-      tag: "Client Web",
-      skills: [
-        { name: "React.js", highlight: true },
-        { name: "Next.js", highlight: true },
-        { name: "TypeScript", highlight: true },
-        { name: "JavaScript", highlight: true },
-        { name: "Tailwind CSS", highlight: true },
-        { name: "Shadcn-UI", highlight: true },
-        { name: "Redux Toolkit", highlight: false },
-        { name: "Framer Motion", highlight: false },
-      ],
-      description:
-        "Designing responsive, accessible web interfaces with Next.js, React, and Tailwind CSS. Implementing state management with Redux Toolkit and modern component systems with Shadcn-UI.",
+      name: "Backend & Systems",
+      icon: <Terminal className="w-3.5 h-3.5 text-emerald-400" />,
     },
     {
       id: "database",
-      title: "Databases, ORM & Languages",
-      subtitle: "Persistence, Caching & Core Languages",
-      icon: <Database className="w-4 h-4 text-zinc-300" />,
-      tag: "Data & Core",
-      skills: [
-        { name: "PostgreSQL", highlight: true },
-        { name: "MongoDB & Mongoose", highlight: true },
-        { name: "MySQL", highlight: false },
-        { name: "Redis Caching", highlight: true },
-        { name: "SQLAlchemy & Prisma ORM", highlight: false },
-        { name: "Golang Basics", highlight: false },
-        { name: "SQL", highlight: true },
-      ],
-      description:
-        "Managing relational datasets with PostgreSQL/MySQL and document stores with MongoDB. Caching frequent queries with Redis and modeling schemas via Prisma and SQLAlchemy.",
+      name: "Databases & Cache",
+      icon: <Database className="w-3.5 h-3.5 text-cyan-400" />,
     },
   ];
 
-  const filteredCategories =
-    activeTab === "all"
-      ? skillCategories
-      : skillCategories.filter((c) => c.id === activeTab);
+  const allSkills = [
+    // Cloud & AWS
+    { name: "AWS", category: "cloud", Logo: TechLogos.AWS, featured: true },
+    { name: "AWS EC2", category: "cloud", Logo: TechLogos.AWS },
+    { name: "AWS EKS", category: "cloud", Logo: TechLogos.AWS, featured: true },
+    { name: "AWS ECS", category: "cloud", Logo: TechLogos.AWS },
+    { name: "AWS S3", category: "cloud", Logo: TechLogos.AWS },
+    { name: "AWS VPC", category: "cloud", Logo: TechLogos.AWS, featured: true },
+    { name: "AWS IAM", category: "cloud", Logo: TechLogos.AWS },
+    { name: "AWS RDS", category: "cloud", Logo: TechLogos.AWS },
+    { name: "AWS Lambda", category: "cloud", Logo: TechLogos.AWS },
+    { name: "CloudFormation", category: "cloud", Logo: TechLogos.AWS },
+    { name: "Azure", category: "cloud", Logo: TechLogos.Azure },
+
+    // DevOps & Containers
+    { name: "Docker", category: "devops", Logo: TechLogos.Docker, featured: true },
+    { name: "Kubernetes", category: "devops", Logo: TechLogos.Kubernetes, featured: true },
+    { name: "Terraform", category: "devops", Logo: TechLogos.Terraform, featured: true },
+    { name: "Ansible", category: "devops", Logo: TechLogos.Ansible },
+    { name: "Argo CD", category: "devops", Logo: TechLogos.ArgoCD, featured: true },
+    { name: "Helm", category: "devops", Logo: TechLogos.Helm, featured: true },
+    { name: "GitHub Actions", category: "devops", Logo: TechLogos.GitHubActions, featured: true },
+    { name: "Jenkins", category: "devops", Logo: TechLogos.Jenkins, featured: true },
+    { name: "CI/CD Pipelines", category: "devops", Logo: TechLogos.TerminalCode },
+    { name: "Linux / Ubuntu", category: "devops", Logo: TechLogos.Linux, featured: true },
+    { name: "NGINX", category: "devops", Logo: TechLogos.NGINX },
+    { name: "Git", category: "devops", Logo: TechLogos.Git },
+    { name: "GitHub", category: "devops", Logo: TechLogos.GitHub },
+
+    // DevSecOps & Security
+    { name: "SonarQube (SAST)", category: "security", Logo: TechLogos.SonarQube, featured: true },
+    { name: "Trivy Scanner", category: "security", Logo: TechLogos.Trivy, featured: true },
+    { name: "OWASP Dep-Check", category: "security", Logo: TechLogos.SecurityShield, featured: true },
+    { name: "Container Security", category: "security", Logo: TechLogos.SecurityShield },
+    { name: "Secrets Scanning", category: "security", Logo: TechLogos.SecurityShield },
+
+    // Monitoring & Observability
+    { name: "Prometheus", category: "monitoring", Logo: TechLogos.Prometheus, featured: true },
+    { name: "Grafana", category: "monitoring", Logo: TechLogos.Grafana, featured: true },
+    { name: "Loki", category: "monitoring", Logo: TechLogos.Grafana },
+    { name: "ELK Stack", category: "monitoring", Logo: TechLogos.CloudServer },
+    { name: "Logstash", category: "monitoring", Logo: TechLogos.CloudServer },
+
+    // Backend, Infra & Systems
+    { name: "Python", category: "backend", Logo: TechLogos.Python, featured: true },
+    { name: "Golang", category: "backend", Logo: TechLogos.Golang, featured: true },
+    { name: "Bash Scripting", category: "backend", Logo: TechLogos.Bash, featured: true },
+    { name: "FastAPI", category: "backend", Logo: TechLogos.FastAPI, featured: true },
+    { name: "Node.js", category: "backend", Logo: TechLogos.Nodejs, featured: true },
+    { name: "REST APIs", category: "backend", Logo: TechLogos.TerminalCode },
+    { name: "Kafka (EDA)", category: "backend", Logo: TechLogos.Kafka },
+    { name: "Distributed Systems", category: "backend", Logo: TechLogos.CloudServer },
+    { name: "Gemini API", category: "backend", Logo: TechLogos.Gemini },
+
+    // Databases & Cache
+    { name: "PostgreSQL", category: "database", Logo: TechLogos.PostgreSQL, featured: true },
+    { name: "MongoDB", category: "database", Logo: TechLogos.MongoDB, featured: true },
+    { name: "MySQL", category: "database", Logo: TechLogos.MySQL },
+    { name: "Redis Cache", category: "database", Logo: TechLogos.Redis, featured: true },
+  ];
+
+  const filteredSkills =
+    activeCategory === "all"
+      ? allSkills
+      : allSkills.filter((s) => s.category === activeCategory);
 
   return (
     <section id="stack" className="py-16 md:py-20 border-b border-zinc-900">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Section Header */}
+        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -101,131 +307,100 @@ const Skills = () => {
         >
           <div>
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-1">
-              Capabilities & Tools
+              Infrastructure, Cloud & Systems
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Tech Stack
             </h2>
           </div>
 
-          {/* Quick Filter */}
-          <div className="inline-flex p-1 rounded-lg bg-zinc-950 border border-zinc-800 text-xs font-mono">
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeTab === "all"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setActiveTab("devops")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeTab === "devops"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              DevOps
-            </button>
-            <button
-              onClick={() => setActiveTab("backend")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeTab === "backend"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              Backend & AI
-            </button>
-            <button
-              onClick={() => setActiveTab("frontend")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeTab === "frontend"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              Frontend
-            </button>
+          <div className="text-xs font-mono text-zinc-400">
+            {allSkills.length} Technologies & Tools
           </div>
         </motion.div>
 
-        {/* 2x2 Clean Monochrome Grid with Motion */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {filteredCategories.map((cat, idx) => (
-            <motion.div
-              key={cat.id}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: idx * 0.05 }}
-              whileHover={{ y: -3 }}
-              className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all duration-300 flex flex-col justify-between group"
-            >
-              <div>
-                {/* Card Header */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 group-hover:border-zinc-700 transition-colors">
-                      {cat.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-base font-semibold text-white group-hover:text-zinc-200 transition-colors">
-                        {cat.title}
-                      </h3>
-                      <p className="text-[11px] font-mono text-zinc-400">
-                        {cat.subtitle}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
-                    {cat.tag}
-                  </span>
-                </div>
-
-                {/* Brief description */}
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
-                  {cat.description}
-                </p>
-              </div>
-
-              {/* Skills Tags */}
-              <div className="pt-3 border-t border-zinc-900">
-                <div className="flex flex-wrap gap-1.5">
-                  {cat.skills.map((skill) => (
-                    <span
-                      key={skill.name}
-                      className={`px-2.5 py-1 rounded-md text-xs font-mono transition-colors ${
-                        skill.highlight
-                          ? "bg-zinc-900 text-zinc-200 border border-zinc-700 font-medium"
-                          : "bg-zinc-900/60 text-zinc-400 border border-zinc-850"
-                      }`}
-                    >
-                      {skill.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Languages & Environments Strip */}
+        {/* Filter Pills */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-wrap gap-2 mb-8"
+        >
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 border ${
+                  isActive
+                    ? "bg-zinc-800 text-white border-zinc-600 shadow-sm"
+                    : "bg-zinc-950/80 text-zinc-400 border-zinc-850 hover:border-zinc-700 hover:text-zinc-200 hover:bg-zinc-900/50"
+                }`}
+              >
+                {cat.icon}
+                <span>{cat.name}</span>
+              </button>
+            );
+          })}
+        </motion.div>
+
+        {/* Skill Badges Cloud with Authentic Logos */}
+        <motion.div
+          layout
+          className="flex flex-wrap gap-2.5 sm:gap-3 p-6 sm:p-7 rounded-2xl bg-zinc-950 border border-zinc-850/80 relative overflow-hidden"
+        >
+          {/* Subtle glow in background */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-blue-500/5 via-transparent to-transparent pointer-events-none rounded-full blur-2xl" />
+
+          <AnimatePresence mode="popLayout">
+            {filteredSkills.map((skill) => (
+              <motion.div
+                key={skill.name}
+                layout
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.2 }}
+                whileHover={{ y: -3, scale: 1.03 }}
+                className={`inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-mono transition-all duration-200 cursor-default select-none group border ${
+                  skill.featured
+                    ? "bg-zinc-900/90 border-zinc-750 text-zinc-100 hover:border-zinc-500 hover:bg-zinc-800/90 hover:shadow-lg hover:shadow-black/40"
+                    : "bg-zinc-900/50 border-zinc-850 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-850 hover:text-white"
+                }`}
+              >
+                {skill.Logo && (
+                  <span className="shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                    <skill.Logo />
+                  </span>
+                )}
+                <span>{skill.name}</span>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Architecture & Engineering Footnote */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="mt-6 p-4 rounded-xl bg-zinc-950 border border-zinc-850 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-zinc-400"
+          className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono text-zinc-400"
         >
-          <div className="flex items-center gap-2">
-            <Terminal className="w-4 h-4 text-zinc-400 shrink-0" />
-            <span>Languages: Python · JavaScript · TypeScript · Golang · SQL</span>
+          <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-850 flex items-center gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>Infrastructure as Code with Terraform</span>
           </div>
-          <span className="text-zinc-400 text-[11px] shrink-0">Linux Ubuntu · Dockerized Workflow</span>
+          <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-850 flex items-center gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
+            <span>GitOps & Zero-Downtime Deployment</span>
+          </div>
+          <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-850 flex items-center gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>Automated CI/CD & Security Gates</span>
+          </div>
         </motion.div>
       </div>
     </section>

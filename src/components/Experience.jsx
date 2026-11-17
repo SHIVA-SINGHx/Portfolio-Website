@@ -1,9 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Code2, PenTool, ExternalLink } from "lucide-react";
+import { Calendar, MapPin, Code2, PenTool, ExternalLink, Briefcase } from "lucide-react";
 
 const Experience = () => {
   const experiences = [
+    {
+      role: "Software Developer Intern",
+      organization: "DiziCode Infotech — Remote",
+      period: "July 2026 – Nov 2026",
+      location: "Remote",
+      type: "Internship",
+      badge: "Internship",
+      description:
+        "Worked as a full-stack and cloud developer intern, designing and building REST APIs, managing multi-database architectures, and deploying production-grade applications on AWS infrastructure.",
+      highlights: [
+        "Designed and built REST API endpoints using Node.js, TypeScript, and FastAPI, covering authentication, validation, and CRUD for client website projects.",
+        "Modeled and managed data across MongoDB, PostgreSQL, and MySQL, choosing the database based on data structure and query needs.",
+        "Deployed applications to production on AWS EC2 with RDS and S3, configuring networking through VPC and security groups.",
+      ],
+      skills: ["Node.js", "TypeScript", "FastAPI", "MongoDB", "PostgreSQL", "MySQL", "AWS EC2", "RDS", "S3", "VPC"],
+      icon: <Briefcase className="w-4 h-4 text-zinc-300" />,
+      link: null,
+    },
     {
       role: "Technical Writer",
       organization: "Medium — Remote",
@@ -84,8 +102,13 @@ const Experience = () => {
                     {exp.icon}
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-zinc-200 transition-colors flex items-center gap-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-zinc-200 transition-colors flex items-center gap-2 flex-wrap">
                       <span>{exp.role}</span>
+                      {exp.badge && (
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono uppercase tracking-wider">
+                          {exp.badge}
+                        </span>
+                      )}
                       {exp.link && (
                         <a
                           href={exp.link}

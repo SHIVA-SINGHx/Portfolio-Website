@@ -11,6 +11,7 @@ import {
   FileText,
   ExternalLink,
   MapPin,
+  Phone,
   Terminal,
   Cpu,
   Cloud,
@@ -35,52 +36,63 @@ const Hero = ({ onOpenResume }) => {
       href: "https://github.com/SHIVA-SINGHx",
       icon: <Github className="w-4 h-4" />,
       handle: "@SHIVA-SINGHx",
+      description: "Codebases, open source & repos",
     },
     {
       name: "LinkedIn",
       href: "https://www.linkedin.com/in/shiva-singh-b2104a373/",
       icon: <Linkedin className="w-4 h-4" />,
       handle: "in/shiva-singh",
+      description: "Professional journey & network",
     },
     {
       name: "X (Twitter)",
       href: "https://x.com/Shivatwd1",
       icon: <Twitter className="w-4 h-4" />,
       handle: "@Shivatwd1",
+      description: "Engineering thoughts & tech updates",
     },
     {
       name: "Medium",
       href: "https://medium.com/@shivasingh.1dev",
       icon: <BookOpen className="w-4 h-4" />,
       handle: "@shivasingh.1dev",
+      description: "Technical articles & system guides",
     },
   ];
 
   const pillars = [
     {
-      icon: <Code2 className="w-4 h-4 text-zinc-300" />,
-      title: "Full-Stack Development",
-      detail:
-        "Building end-to-end web apps with React, Next.js, Node.js, Express, and FastAPI. Focus on responsive UX, state management, and robust REST APIs.",
-    },
-    {
       icon: <Cloud className="w-4 h-4 text-zinc-300" />,
-      title: "DevOps & Cloud Automation",
+      title: "DevOps & Cloud Infrastructure",
       detail:
-        "Multi-stage Docker containerization (slashing deploy times from 15m to <3m), CI/CD pipelines via GitHub Actions, Linux VPS administration, NGINX, and AWS EC2/VPC.",
+        "Architecting resilient multi-tier AWS environments (VPC, EC2, EKS, RDS, S3), Infrastructure as Code with Terraform, and Linux production administration.",
     },
     {
       icon: <Cpu className="w-4 h-4 text-zinc-300" />,
-      title: "Generative AI Systems",
+      title: "Containers & GitOps CI/CD",
       detail:
-        "Architecting generative AI applications like Lexify AI & Gymnex with Google Gemini API, structured function calling, and fast token streaming.",
+        "Building multi-stage Docker images, Kubernetes microservices orchestration, Argo CD GitOps deployments, and automated Jenkins / GitHub Actions pipelines.",
+    },
+    {
+      icon: <Code2 className="w-4 h-4 text-zinc-300" />,
+      title: "Backend & Systems Development",
+      detail:
+        "Developing scalable REST APIs and services with Node.js, TypeScript, FastAPI, Python, and Go with relational and NoSQL databases.",
     },
     {
       icon: <BookOpen className="w-4 h-4 text-zinc-300" />,
-      title: "Technical Writing",
+      title: "Technical Writing & DevSecOps",
       detail:
-        "5+ published in-depth guides on Medium covering Python, FastAPI, Docker, and Linux fundamentals with hands-on code examples for developers.",
+        "Publishing in-depth blueprints on Medium covering container security (Trivy, SonarQube, OWASP), Linux fundamentals, and cloud automation.",
     },
+  ];
+
+  const stats = [
+    { label: "Cloud & DevOps Projects", value: "4+" },
+    { label: "Technical Guides", value: "5+" },
+    { label: "Total Projects", value: "8+" },
+    { label: "Location", value: "Delhi, IN" },
   ];
 
   return (
@@ -104,14 +116,22 @@ const Hero = ({ onOpenResume }) => {
             </h1>
 
             <p className="text-base sm:text-lg text-zinc-300 font-medium">
-              Full Stack & Cloud/DevOps Engineer <span className="text-zinc-600">·</span> Technical Writer
+              DevOps & Cloud Engineer <span className="text-zinc-600">·</span> Infrastructure & Backend
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1 text-xs font-mono text-zinc-400">
               <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-zinc-500" /> Remote
+                <MapPin className="w-3.5 h-3.5 text-zinc-500" /> Delhi, India
               </span>
-
+              {/* <span>•</span>
+              <a
+                href={`tel:${phone}`}
+                className="hover:text-white transition-colors flex items-center gap-1"
+              >
+                <Phone className="w-3.5 h-3.5 text-zinc-500" /> {phone}
+              </a> */}
+              <span>•</span>
+              <span className="text-zinc-400">shiva-portfolio.com</span>
             </div>
           </div>
 
@@ -143,19 +163,41 @@ const Hero = ({ onOpenResume }) => {
           </div>
 
           <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
-            In my tech journey, I’ve embraced <span className="text-white font-semibold">versatility</span>. While I excel in various stacks like <span className="text-zinc-100 font-medium">Frontend, Backend, DevOps/Cloud, and AI</span>, I don’t limit myself—I adjust to each project’s needs, readily learning new skills if required whether it’s a new language, framework, or tech trend.
+            Hands-on DevOps & Cloud Engineer specializing in <span className="text-white font-semibold">automated CI/CD pipelines, container orchestration, and AWS/Azure cloud infrastructure</span>. Passionate about streamlining software delivery with self-healing Kubernetes clusters, Terraform IaC, and proactive DevSecOps security scanning.
           </p>
 
           <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
-            From containerizing full-stack platforms with multi-stage Docker builds to architecting multi-tier cloud systems on AWS and publishing developer blueprints on Medium, I thrive on adapting to fulfill company requirements and user satisfaction.
+            From deploying microservices with Argo CD GitOps to integrating automated quality gates (Trivy, SonarQube, OWASP) and configuring cluster observability with Prometheus & Grafana, I focus on reliability, scalability, and robust developer workflows.
           </p>
+        </motion.div>
+
+        {/* Quick Stats Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8"
+        >
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="p-4 rounded-xl bg-zinc-950/80 border border-zinc-850 text-center"
+            >
+              <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">
+                {s.value}
+              </div>
+              <div className="text-[11px] font-mono text-zinc-400 mt-1">
+                {s.label}
+              </div>
+            </div>
+          ))}
         </motion.div>
 
         {/* 4 Engineering Pillars Grid */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-8"
         >
           <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-3">
@@ -189,7 +231,7 @@ const Hero = ({ onOpenResume }) => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
           className="flex flex-wrap items-center gap-3 pt-2"
         >
           <button
@@ -231,7 +273,7 @@ const Hero = ({ onOpenResume }) => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 pt-6 border-t border-zinc-900/80 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5"
         >
           {socials.map((social) => (

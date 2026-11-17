@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
   ExternalLink,
@@ -11,6 +11,8 @@ import {
   Layers,
   BookMarked,
   GitPullRequest,
+  Container,
+  Shield,
 } from "lucide-react";
 import gymnexImage from "../assets/gymnex.png";
 import saralgymImage from "../assets/saralgym.png";
@@ -23,6 +25,65 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
+      title: "Kubernetes GitOps Voting App",
+      tagline: "Microservices Deployment with GitOps & Full Observability",
+      category: "cloud",
+      categoryLabel: "Cloud & DevOps",
+      description:
+        "Production-grade Kubernetes deployment of a multi-service voting application. Migrated from Docker Compose to a fully orchestrated K8s cluster on AWS EC2, with GitOps-driven delivery via Argo CD and complete observability through Prometheus & Grafana.",
+      highlights: [
+        "Deployed microservices (vote, result, worker, Redis, PostgreSQL) on K8s with Argo CD GitOps",
+        "Full observability stack: Prometheus metrics scraping + Grafana dashboards + health probes",
+        "Helm-packaged deployments replacing manual Docker Compose for production-grade rollouts",
+      ],
+      tech: [
+        "Kubernetes",
+        "Argo CD",
+        "Helm",
+        "Docker",
+        "Prometheus",
+        "Grafana",
+        "AWS EC2",
+        "Linux",
+        "Redis",
+        "PostgreSQL",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/k8s-gitops-voting-app",
+      live: null,
+      image: null,
+      icon: <Container className="w-4 h-4 text-zinc-300" />,
+    },
+    {
+      id: 2,
+      title: "Three-Tier DevSecOps Pipeline",
+      tagline: "Secure CI/CD Pipeline with SAST, Container & Infra Scanning",
+      category: "cloud",
+      categoryLabel: "Cloud & DevOps",
+      description:
+        "End-to-end DevSecOps pipeline integrating security at every stage of delivery. Automates OWASP Dependency-Check, Trivy container vulnerability scanning, and SonarQube SAST as quality gates before deployment, with Terraform-managed infrastructure and Kubernetes orchestration.",
+      highlights: [
+        "Security-first pipeline: OWASP Dependency-Check, Trivy & SonarQube SAST as quality gates",
+        "Terraform IaC for reproducible AWS infrastructure + Kubernetes for container orchestration",
+        "Automated secrets detection, container scanning & compliance checks in CI/CD flow",
+      ],
+      tech: [
+        "Terraform",
+        "Kubernetes",
+        "Docker",
+        "OWASP",
+        "Trivy",
+        "SonarQube",
+        "GitHub Actions",
+        "AWS",
+        "Linux",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/three-tier-devsecops-pipeline",
+      live: null,
+      image: null,
+      icon: <Shield className="w-4 h-4 text-zinc-300" />,
+    },
+    {
+      id: 3,
       title: "Node.js App CI/CD Pipeline",
       tagline: "Automated Containerization & Continuous Delivery Pipeline",
       category: "cloud",
@@ -48,7 +109,7 @@ const Projects = () => {
       icon: <GitPullRequest className="w-4 h-4 text-zinc-300" />,
     },
     {
-      id: 2,
+      id: 4,
       title: "Three-Tier Architecture on AWS",
       tagline: "High Availability Cloud Infrastructure in Custom VPC",
       category: "cloud",
@@ -74,7 +135,7 @@ const Projects = () => {
       icon: <Cloud className="w-4 h-4 text-zinc-300" />,
     },
     {
-      id: 3,
+      id: 5,
       title: "Tech-Cart — Full-Stack E-Commerce Engine",
       tagline: "Dockerized Online Retail System with Real-Time Inventory",
       category: "fullstack",
@@ -101,50 +162,6 @@ const Projects = () => {
       live: "https://tech-cart-delta.vercel.app/",
       image: techcartImage,
       icon: <ShoppingCart className="w-4 h-4 text-zinc-300" />,
-    },
-    {
-      id: 4,
-      title: "Library Management System",
-      tagline: "Object-Oriented Operations & Inventory Core",
-      category: "systems",
-      categoryLabel: "Python & Systems",
-      description:
-        "Robust library inventory and checkout management system implementing clean object-oriented architecture, member accounts, book tracking, input validation, and persistent SQL database records.",
-      highlights: [
-        "Object-oriented design pattern with modular catalog and borrower classes",
-        "Persistent SQL database records for issue/return tracking and inventory",
-        "Automated transaction audit trails and overdue management",
-      ],
-      tech: [
-        "Python",
-        "SQL",
-        "Database Design",
-        "OOP Architecture",
-        "CLI",
-      ],
-      github: "https://github.com/SHIVA-SINGHx/Library-Management-System",
-      live: "https://library-management-system-brown-phi.vercel.app/",
-      image: libraryImage,
-      icon: <BookMarked className="w-4 h-4 text-zinc-300" />,
-    },
-    {
-      id: 5,
-      title: "Lexify AI — Generative Content Studio",
-      tagline: "Multimodal AI Copywriting Powered by Gemini API",
-      category: "ai",
-      categoryLabel: "AI & Next.js",
-      description:
-      "AI-driven content creation studio utilizing Google Gemini API to generate structured blog posts, social media captions, marketing copy, and hashtag recommendations. Features interactive user prompt history tracking and instant search.",
-      highlights: [
-        "Automated generation of blogs, social captions & marketing copy via Gemini API",
-        "User history tracking with instant search & generation management",
-        "Sleek UI with Next.js, Shadcn-UI & Tailwind CSS",
-      ],
-      tech: ["Next.js", "Gemini API", "Shadcn-UI", "Tailwind CSS", "TypeScript"],
-      github: "https://github.com/SHIVA-SINGHx",
-      live: null,
-      image: null,
-      icon: <Sparkles className="w-4 h-4 text-zinc-300" />,
     },
     {
       id: 6,
@@ -174,6 +191,25 @@ const Projects = () => {
       },
     {
       id: 7,
+      title: "Lexify AI — Generative Content Studio",
+      tagline: "Multimodal AI Copywriting Powered by Gemini API",
+      category: "ai",
+      categoryLabel: "AI & Next.js",
+      description:
+      "AI-driven content creation studio utilizing Google Gemini API to generate structured blog posts, social media captions, marketing copy, and hashtag recommendations. Features interactive user prompt history tracking and instant search.",
+      highlights: [
+        "Automated generation of blogs, social captions & marketing copy via Gemini API",
+        "User history tracking with instant search & generation management",
+        "Sleek UI with Next.js, Shadcn-UI & Tailwind CSS",
+      ],
+      tech: ["Next.js", "Gemini API", "Shadcn-UI", "Tailwind CSS", "TypeScript"],
+      github: "https://github.com/SHIVA-SINGHx/LexifyAI",
+      live: null,
+      image: null,
+      icon: <Sparkles className="w-4 h-4 text-zinc-300" />,
+    },
+    {
+      id: 8,
       title: "Saral-Gym — Client Web Platform",
       tagline: "Production Client Business Website with Fluid Micro-UX",
       category: "fullstack",
@@ -242,7 +278,7 @@ const Projects = () => {
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
-              Cloud & DevOps (2)
+              Cloud & DevOps (4)
             </button>
             <button
               onClick={() => setActiveFilter("ai")}
@@ -262,22 +298,24 @@ const Projects = () => {
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
-              Full Stack & Systems (3)
+              Full Stack (2)
             </button>
           </div>
         </motion.div>
 
-        {/* Projects Grid with Framer Motion */}
+        {/* Projects Grid with AnimatePresence for smooth filter transitions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: idx * 0.05 }}
-              whileHover={{ y: -3 }}
-              className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-all duration-300 group"
+              layout
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.97 }}
+              transition={{ duration: 0.3, delay: idx * 0.04 }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-colors duration-300 group"
             >
               <div>
                 {/* Image Preview if available */}
@@ -286,7 +324,7 @@ const Projects = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                      className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
                 )}
@@ -382,6 +420,7 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
+          </AnimatePresence>
         </div>
 
         {/* GitHub footer banner with Motion */}

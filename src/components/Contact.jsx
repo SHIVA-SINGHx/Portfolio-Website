@@ -10,6 +10,7 @@ import {
   Send,
   ArrowUpRight,
   MessageSquare,
+  Phone,
   MapPin,
   BookOpen,
 } from "lucide-react";
@@ -111,12 +112,18 @@ const Contact = () => {
                   Direct Contact
                 </span>
                 <p className="text-sm text-white font-medium mb-3">
-                  Reach out directly via email
+                  Reach out directly via email or phone
                 </p>
                 <div className="space-y-1 mb-4 text-xs font-mono text-zinc-400">
                   <p className="flex items-center gap-1.5 text-zinc-300">
-                    <MapPin className="w-3.5 h-3.5 text-zinc-500" /> Remote
+                    <MapPin className="w-3.5 h-3.5 text-zinc-500" /> Delhi, India
                   </p>
+                  {/* <a
+                    href={`tel:${phoneNumber}`}
+                    className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-zinc-500" /> {phoneNumber}
+                  </a> */}
                 </div>
               </div>
 
