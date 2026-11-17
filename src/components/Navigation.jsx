@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, X, FileText, Sun, Moon } from "lucide-react";
 
-const Navigation = ({ onOpenResume }) => {
+const Navigation = ({ onOpenResume, isDark, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -27,7 +27,7 @@ const Navigation = ({ onOpenResume }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-black/85 backdrop-blur-md border-b border-zinc-900 py-3.5 shadow-sm"
+          ? "bg-black/85 dark:bg-black/85 light:bg-white/90 backdrop-blur-md border-b border-zinc-800/80 dark:border-zinc-900 py-3.5 shadow-sm"
           : "bg-transparent py-5"
       }`}
     >
@@ -35,7 +35,7 @@ const Navigation = ({ onOpenResume }) => {
         {/* Brand / Logo */}
         <a
           href="#about"
-          className="group flex items-center gap-2.5 text-zinc-200 hover:text-white transition-colors"
+          className="group flex items-center gap-2.5 text-zinc-200 dark:text-zinc-200 hover:text-white transition-colors"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span className="font-mono text-sm tracking-tight font-medium text-white group-hover:text-zinc-300 transition-colors">
@@ -56,6 +56,20 @@ const Navigation = ({ onOpenResume }) => {
             </a>
           ))}
 
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark/light mode"
+            className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-all active:scale-95"
+            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDark ? (
+              <Sun className="w-3.5 h-3.5 text-amber-400 hover:rotate-45 transition-transform" />
+            ) : (
+              <Moon className="w-3.5 h-3.5 text-blue-400 hover:-rotate-12 transition-transform" />
+            )}
+          </button>
+
           <button
             onClick={onOpenResume}
             className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono text-zinc-200 bg-zinc-900 hover:bg-white hover:text-black border border-zinc-800 hover:border-white rounded-md transition-all duration-200"
@@ -66,7 +80,19 @@ const Navigation = ({ onOpenResume }) => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2.5 md:hidden">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark/light mode"
+            className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300"
+          >
+            {isDark ? (
+              <Sun className="w-3.5 h-3.5 text-amber-400" />
+            ) : (
+              <Moon className="w-3.5 h-3.5 text-blue-400" />
+            )}
+          </button>
+
           <button
             onClick={onOpenResume}
             className="px-2.5 py-1 text-xs font-mono text-zinc-200 bg-zinc-900 border border-zinc-800 rounded-md"

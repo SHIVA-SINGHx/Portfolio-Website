@@ -111,12 +111,17 @@ const Hero = ({ onOpenResume }) => {
               <span>Available for full-time & high-impact freelance projects</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
-              Shiva Singh
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+              <span className="text-white">Shiva </span>
+              <span className="font-serif italic font-normal bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                Singh
+              </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-zinc-300 font-medium">
-              DevOps & Cloud Engineer <span className="text-zinc-600">·</span> Infrastructure & Backend
+            <p className="text-base sm:text-lg text-zinc-300 font-medium flex items-center gap-2 flex-wrap">
+              <span className="text-zinc-200">DevOps & Cloud Engineer</span>
+              <span className="text-zinc-600">·</span>
+              <span className="text-emerald-400/90 font-mono text-sm tracking-wide">Infrastructure & Backend</span>
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1 text-xs font-mono text-zinc-400">
@@ -163,7 +168,10 @@ const Hero = ({ onOpenResume }) => {
           </div>
 
           <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
-            Hands-on DevOps & Cloud Engineer specializing in <span className="text-white font-semibold">automated CI/CD pipelines, container orchestration, and AWS/Azure cloud infrastructure</span>. Passionate about streamlining software delivery with self-healing Kubernetes clusters, Terraform IaC, and proactive DevSecOps security scanning.
+            Hands-on DevOps & Cloud Engineer specializing in{" "}
+            <span className="font-serif italic text-emerald-300 font-normal text-base sm:text-lg">automated CI/CD pipelines</span>,{" "}
+            <span className="text-white font-semibold">container orchestration</span>, and{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent font-medium">AWS/Azure cloud infrastructure</span>. Passionate about streamlining software delivery with self-healing Kubernetes clusters, Terraform IaC, and proactive DevSecOps security scanning.
           </p>
 
           <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">

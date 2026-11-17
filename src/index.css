@@ -6,12 +6,55 @@
   html {
     scroll-behavior: smooth;
   }
-  body {
+  html.dark body {
     background-color: #000000;
     color: #f4f4f5;
+  }
+  html.light body {
+    background-color: #fafafa;
+    color: #18181b;
+  }
+  body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
+
+/* Light Mode Overrides for Crisp Modern Readability */
+html.light .bg-black {
+  background-color: #fafafa !important;
+}
+html.light .bg-zinc-950 {
+  background-color: #ffffff !important;
+  border-color: #e4e4e7 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+html.light .bg-zinc-900 {
+  background-color: #f4f4f5 !important;
+  border-color: #e4e4e7 !important;
+}
+html.light .border-zinc-900,
+html.light .border-zinc-850,
+html.light .border-zinc-800 {
+  border-color: #e4e4e7 !important;
+}
+html.light .text-white {
+  color: #09090b !important;
+}
+html.light .text-zinc-100 {
+  color: #18181b !important;
+}
+html.light .text-zinc-200 {
+  color: #27272a !important;
+}
+html.light .text-zinc-300 {
+  color: #3f3f46 !important;
+}
+html.light .text-zinc-400 {
+  color: #71717a !important;
+}
+html.light .hover\:border-zinc-700:hover {
+  border-color: #a1a1aa !important;
 }
 
 /* Custom minimal scrollbar */
@@ -20,13 +63,20 @@
   height: 6px;
 }
 
-::-webkit-scrollbar-track {
+html.dark ::-webkit-scrollbar-track {
   background: #09090b;
+}
+html.light ::-webkit-scrollbar-track {
+  background: #f4f4f5;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #27272a;
   border-radius: 9999px;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
 }
 
 ::-webkit-scrollbar-thumb:hover {

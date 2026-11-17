@@ -20,7 +20,7 @@ const Experience = () => {
         "Deployed applications to production on AWS EC2 with RDS and S3, configuring networking through isolated VPC subnets and security groups.",
       ],
       skills: ["Node.js", "TypeScript", "FastAPI", "MongoDB", "PostgreSQL", "MySQL", "AWS", "EC2", "RDS", "S3", "VPC"],
-      iconLogo: <TechIcons.AWS className="w-5 h-5" />,
+      iconLogo: <Briefcase className="w-5 h-5 text-emerald-400" />,
       link: null,
     },
     {
@@ -36,8 +36,8 @@ const Experience = () => {
         "Created hands-on developer guides with runnable code examples for FastAPI, PostgreSQL integration, and asynchronous workflows.",
         "Authored blueprints on Docker multi-stage builds, shell scripting automation, and multi-tier cloud deployments.",
       ],
-      skills: ["Python", "FastAPI", "PostgreSQL", "Docker", "Linux", "Bash"],
-      iconLogo: <TechIcons.Python className="w-5 h-5" />,
+      skills: ["Medium", "Python", "FastAPI", "PostgreSQL", "Docker", "Linux", "Bash"],
+      iconLogo: <TechIcons.Medium className="w-5 h-5 text-white" />,
       link: "https://medium.com/@shivasingh.1dev",
     },
     {
