@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- Background subtle radial glow -->
+    <radialGradient id="cardGlow" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </radialGradient>
+    
+    <!-- Accent emerald gradient -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Terminal cyan-blue gradient -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Rounded Square Icon Base -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#cardGlow)" stroke="#27272a" stroke-width="2"/>
+
+  <!-- Subtle Inner Border for depth -->
+  <rect x="3" y="3" width="58" height="58" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- Aesthetic Stylized "S" with DevOps Terminal & Cloud Vibe -->
+  <!-- Upper Curve of S -->
+  <path d="M 43 20 C 43 15, 23 14, 21 23 C 19 31, 45 31, 43 42 C 41 50, 21 49, 19 44" 
+        fill="none" 
+        stroke="url(#emeraldGrad)" 
+        stroke-width="5.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+
+  <!-- Terminal Command Prompt chevron '>' in top corner -->
+  <path d="M 12 14 L 16 18 L 12 22" 
+        fill="none" 
+        stroke="url(#blueGrad)" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        opacity="0.9"/>
+
+  <!-- Status Pulse Dot (Live/Active Cloud) -->
+  <circle cx="50" cy="14" r="3" fill="#34d399"/>
+  <circle cx="50" cy="14" r="5" fill="#34d399" opacity="0.3"/>
+</svg>
