@@ -4,24 +4,23 @@ import {
   Github,
   ExternalLink,
   ArrowUpRight,
-  Cloud,
-  Sparkles,
-  Server,
-  ShoppingCart,
   Layers,
-  BookMarked,
-  GitPullRequest,
-  Container,
-  Shield,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
+import { TechIcons, getTechIcon } from "./icons/TechIcons";
+import quicktoImage from "../assets/quickto.png";
+import terraformArchImage from "../assets/terraform-tier-3.png";
 import gymnexImage from "../assets/gymnex.png";
 import saralgymImage from "../assets/saralgym.png";
-import techcartImage from "../assets/techcart.png"
-import libraryImage from "../assets/library.png"
+import techcartImage from "../assets/techcart.png";
+import k8sVotingImage from "../assets/k8s-voting.png";
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [showAll, setShowAll] = useState(false);
 
+  // All 9 projects ordered with Top 6 priority:
   const projects = [
     {
       id: 1,
@@ -29,12 +28,13 @@ const Projects = () => {
       tagline: "Microservices Deployment with GitOps & Full Observability",
       category: "cloud",
       categoryLabel: "Cloud & DevOps",
+      featured: true,
       description:
-        "Production-grade Kubernetes deployment of a multi-service voting application. Migrated from Docker Compose to a fully orchestrated K8s cluster on AWS EC2, with GitOps-driven delivery via Argo CD and complete observability through Prometheus & Grafana.",
+        "Production-grade Kubernetes deployment of a 5-component microservices app (Python, Node.js, .NET, Redis, PostgreSQL). Migrated from Docker Compose to an EC2 3-node cluster with automated GitOps delivery via Argo CD and complete Prometheus/Grafana observability.",
       highlights: [
-        "Deployed microservices (vote, result, worker, Redis, PostgreSQL) on K8s with Argo CD GitOps",
-        "Full observability stack: Prometheus metrics scraping + Grafana dashboards + health probes",
-        "Helm-packaged deployments replacing manual Docker Compose for production-grade rollouts",
+        "Automated continuous delivery with Argo CD GitOps controller on 3-node Kubernetes cluster",
+        "Full-stack observability with kube-prometheus-stack Helm chart & custom Grafana dashboards",
+        "Docker multi-stage builds & containerization of all microservices with self-healing pods",
       ],
       tech: [
         "Kubernetes",
@@ -50,50 +50,135 @@ const Projects = () => {
       ],
       github: "https://github.com/SHIVA-SINGHx/k8s-gitops-voting-app",
       live: null,
-      image: null,
-      icon: <Container className="w-4 h-4 text-zinc-300" />,
+      image: k8sVotingImage,
+      iconLogo: <TechIcons.Kubernetes className="w-4 h-4" />,
     },
     {
       id: 2,
-      title: "Three-Tier DevSecOps Pipeline",
-      tagline: "Secure CI/CD Pipeline with SAST, Container & Infra Scanning",
+      title: "3-Tier AWS Infrastructure with Terraform",
+      tagline: "Multi-AZ Cloud Architecture with Auto Scaling & RDS",
       category: "cloud",
-      categoryLabel: "Cloud & DevOps",
+      categoryLabel: "Cloud & IaC",
+      featured: true,
       description:
-        "End-to-end DevSecOps pipeline integrating security at every stage of delivery. Automates OWASP Dependency-Check, Trivy container vulnerability scanning, and SonarQube SAST as quality gates before deployment, with Terraform-managed infrastructure and Kubernetes orchestration.",
+        "Highly available 3-tier web architecture on AWS provisioned entirely with modular Terraform IaC. Features a custom VPC across 2 AZs, public & internal Application Load Balancers, Node.js frontend and Go backend Auto Scaling Groups, and multi-AZ Amazon RDS PostgreSQL.",
       highlights: [
-        "Security-first pipeline: OWASP Dependency-Check, Trivy & SonarQube SAST as quality gates",
-        "Terraform IaC for reproducible AWS infrastructure + Kubernetes for container orchestration",
-        "Automated secrets detection, container scanning & compliance checks in CI/CD flow",
+        "VPC with 8 subnets across 2 AZs, NAT Gateways, and isolated public, app, and DB tiers",
+        "Dual ALBs with EC2 Auto Scaling Groups (Node.js frontend & Go backend microservices)",
+        "Automated deployment with single `terraform apply`, AWS Secrets Manager & CloudWatch logs",
       ],
       tech: [
         "Terraform",
+        "AWS",
+        "Go",
+        "Node.js",
+        "PostgreSQL",
+        "Docker",
+        "Linux",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/terraform-tier-3-infrastructure",
+      live: null,
+      image: terraformArchImage,
+      iconLogo: <TechIcons.Terraform className="w-4 h-4" />,
+    },
+    {
+      id: 3,
+      title: "Quickto — Multilingual Quick-Commerce Search",
+      tagline: "Event-Driven Catalog Search with Kafka & Multi-DB",
+      category: "cloud",
+      categoryLabel: "Backend & Distributed Systems",
+      featured: true,
+      description:
+        "High-performance quick-commerce search platform supporting queries across 12 languages (Hindi, Hinglish, regional scripts). Features asynchronous Kafka event queues for background product ingestion, vector & hybrid search with Typesense, and multi-database persistence.",
+      highlights: [
+        "Event-driven architecture with Apache Kafka separating interactive search from background workers",
+        "Hybrid vector search with Typesense, MongoDB persistence, and Redis caching for store catalogs",
+        "Dark store delivery-area routing, AI product enrichment, and real-time search analytics",
+      ],
+      tech: [
+        "Kafka",
+        "Node.js",
+        "MongoDB",
+        "Redis",
+        "Docker",
+        "TypeScript",
+        "REST APIs",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/Quickto",
+      live: null,
+      image: quicktoImage,
+      iconLogo: <TechIcons.Kafka className="w-4 h-4" />,
+    },
+    {
+      id: 4,
+      title: "Go Distributed Microservices",
+      tagline: "Service Catalog & Bookings with gRPC & RabbitMQ",
+      category: "cloud",
+      categoryLabel: "Go & Microservices",
+      featured: true,
+      description:
+        "Modular distributed microservices system written in Go. Implements inter-service gRPC communication for instant catalog lookup, RabbitMQ message queues for event-driven asynchronous booking notifications, and PostgreSQL transactional persistence.",
+      highlights: [
+        "Inter-service gRPC protocol buffer communication with timeout management between Catalog & Booking",
+        "Event-driven messaging via RabbitMQ publishing `booking.created` events to background workers",
+        "Docker Compose orchestration with PostgreSQL relational database schema and health checks",
+      ],
+      tech: [
+        "Go",
+        "gRPC",
+        "RabbitMQ",
+        "PostgreSQL",
+        "Docker",
+        "REST APIs",
+        "Linux",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/Golang-Microservice-Project",
+      live: null,
+      image: null,
+      iconLogo: <TechIcons.Go className="w-4 h-4" />,
+    },
+    {
+      id: 5,
+      title: "End-to-End Three-Tier DevSecOps Pipeline",
+      tagline: "Jenkins CI/CD with SonarQube, Trivy & OWASP Security Gates",
+      category: "cloud",
+      categoryLabel: "DevSecOps & CI/CD",
+      featured: true,
+      description:
+        "Enterprise-grade DevSecOps continuous delivery pipeline on Kubernetes. Integrates SonarQube static code analysis with quality gates, OWASP Dependency-Check for library vulnerabilities, and Trivy filesystem/image security scans before pushing to Amazon ECR.",
+      highlights: [
+        "4 automated security quality gates: SonarQube SAST, OWASP Dependency-Check, and Trivy CVE scanning",
+        "Independent dual Jenkins pipelines automating testing, Docker image building, and K8s manifest updates",
+        "AWS Jenkins CI host provisioned via Terraform with VPC, IAM roles, and S3 remote state backend",
+      ],
+      tech: [
+        "Jenkins",
+        "Terraform",
         "Kubernetes",
         "Docker",
-        "OWASP",
         "Trivy",
         "SonarQube",
-        "GitHub Actions",
+        "OWASP",
         "AWS",
-        "Linux",
       ],
       github: "https://github.com/SHIVA-SINGHx/three-tier-devsecops-pipeline",
       live: null,
       image: null,
-      icon: <Shield className="w-4 h-4 text-zinc-300" />,
+      iconLogo: <TechIcons.Jenkins className="w-4 h-4" />,
     },
     {
-      id: 3,
+      id: 6,
       title: "Node.js App CI/CD Pipeline",
-      tagline: "Automated Containerization & Continuous Delivery Pipeline",
+      tagline: "Automated Containerization & Continuous Delivery",
       category: "cloud",
-      categoryLabel: "Cloud & DevOps",
+      categoryLabel: "DevOps & Automation",
+      featured: true,
       description:
-        "End-to-end continuous integration and delivery pipeline. Automates syntax linting, unit testing, multi-stage Docker image builds, container registry push to Docker Hub, and automated deployment onto remote Linux servers with zero downtime.",
+        "Production-grade continuous integration and continuous delivery pipeline. Automates linting, unit testing, multi-stage Docker builds, image publishing to Docker Hub, and zero-downtime automated deployment to remote Linux servers.",
       highlights: [
-        "Automated unit testing & multi-stage Docker container builds",
-        "Zero-downtime deployment automation via GitHub Actions workflows",
-        "Docker Hub automated versioning and remote Linux host deployment",
+        "Zero-downtime deployment workflows via GitHub Actions runner to Linux VPS",
+        "Automated Docker Hub version tagging and vulnerability testing",
+        "Optimized container layers reducing deployment time from 15m to <3m",
       ],
       tech: [
         "Docker",
@@ -101,142 +186,107 @@ const Projects = () => {
         "Node.js",
         "Linux",
         "CI/CD",
-        "Docker Hub",
       ],
       github: "https://github.com/SHIVA-SINGHx/node-app-pipeline",
       live: null,
       image: null,
-      icon: <GitPullRequest className="w-4 h-4 text-zinc-300" />,
+      iconLogo: <TechIcons.GitHubActions className="w-4 h-4" />,
     },
     {
-      id: 4,
-      title: "Three-Tier Architecture on AWS",
-      tagline: "High Availability Cloud Infrastructure in Custom VPC",
-      category: "cloud",
-      categoryLabel: "Cloud & DevOps",
-      description:
-        "Enterprise-grade 3-tier cloud deployment in an isolated AWS VPC. Segregates public web subnets, private EC2 application compute tiers, and multi-AZ RDS database layers with hardened security groups and NGINX.",
-      highlights: [
-        "Isolated public & private subnets across availability zones",
-        "Automated deployment on EC2 with multi-AZ RDS MySQL",
-        "Hardened NGINX reverse proxy & strict security groups",
-      ],
-      tech: [
-        "AWS VPC",
-        "EC2",
-        "RDS MySQL",
-        "Security Groups",
-        "NGINX",
-        "Linux",
-      ],
-      github: "https://github.com/SHIVA-SINGHx/three-tier-architecture-aws-php",
-      live: null,
-      image: null,
-      icon: <Cloud className="w-4 h-4 text-zinc-300" />,
-    },
-    {
-      id: 5,
+      id: 7,
       title: "Tech-Cart — Full-Stack E-Commerce Engine",
-      tagline: "Dockerized Online Retail System with Real-Time Inventory",
+      tagline: "Dockerized Retail System with Real-Time Inventory",
       category: "fullstack",
-      categoryLabel: "Full Stack & DevOps",
+      categoryLabel: "Full Stack & Microservices",
+      featured: false,
       description:
-        "High-performance e-commerce platform with real-time inventory sync across 500+ concurrent users with optimistic UI updates. Containerized with multi-stage Docker builds reducing deployment time from 15m to <3m. Features email verification via Nodemailer and role-based access for Customers and Admins.",
+        "Containerized high-concurrency online retail system with optimistic UI updates. Features multi-stage Docker builds reducing build latency, JWT authentication, and MongoDB persistence.",
       highlights: [
-        "Real-time inventory sync across 500+ concurrent users",
-        "Role-based authentication & Nodemailer email verification",
-        "Multi-stage Docker containerization (15m → <3m build time)",
+        "Multi-stage Docker builds reducing deployment latency from 15m to <3m",
+        "Real-time inventory sync across 500+ concurrent simulated users",
+        "Full-stack authentication and automated email verification workflows",
       ],
       tech: [
-        "React.js",
-        "Redux Toolkit",
-        "Shadcn-UI",
+        "React",
         "Node.js",
-        "Express.js",
         "MongoDB",
         "Docker",
-        "JWT",
-        "Cloudinary",
+        "TypeScript",
+        "Redis",
       ],
       github: "https://github.com/SHIVA-SINGHx/Tech-Cart",
       live: "https://tech-cart-delta.vercel.app/",
       image: techcartImage,
-      icon: <ShoppingCart className="w-4 h-4 text-zinc-300" />,
-    },
-    {
-      id: 6,
-      title: "Gymnex — AI Fitness Assistant",
-      tagline: "AI Workout & Nutrition Planner with Gemini API",
-      category: "ai",
-      categoryLabel: "Featured · Live AI App",
-      description:
-        "Production AI fitness assistant powered by Google Gemini API. Generates customized fitness schedules, personalized diet plans, and real-time guidance with Clerk authentication and MongoDB persistence.",
-        highlights: [
-          "Gemini API generative prompt orchestration",
-          "Clerk secure social login & profile sync",
-          "Live on Vercel with active real-world usage",
-        ],
-        tech: [
-          "Gemini API",
-          "Next.js",
-          "MongoDB",
-          "Clerk Auth",
-          "Shadcn UI",
-          "Tailwind CSS",
-        ],
-        github: "https://github.com/SHIVA-SINGHx/Gymnex",
-        live: "https://gymnex.vercel.app/",
-        image: gymnexImage,
-        icon: <Sparkles className="w-4 h-4 text-zinc-300" />,
-      },
-    {
-      id: 7,
-      title: "Lexify AI — Generative Content Studio",
-      tagline: "Multimodal AI Copywriting Powered by Gemini API",
-      category: "ai",
-      categoryLabel: "AI & Next.js",
-      description:
-      "AI-driven content creation studio utilizing Google Gemini API to generate structured blog posts, social media captions, marketing copy, and hashtag recommendations. Features interactive user prompt history tracking and instant search.",
-      highlights: [
-        "Automated generation of blogs, social captions & marketing copy via Gemini API",
-        "User history tracking with instant search & generation management",
-        "Sleek UI with Next.js, Shadcn-UI & Tailwind CSS",
-      ],
-      tech: ["Next.js", "Gemini API", "Shadcn-UI", "Tailwind CSS", "TypeScript"],
-      github: "https://github.com/SHIVA-SINGHx/LexifyAI",
-      live: null,
-      image: null,
-      icon: <Sparkles className="w-4 h-4 text-zinc-300" />,
+      iconLogo: <TechIcons.Docker className="w-4 h-4" />,
     },
     {
       id: 8,
-      title: "Saral-Gym — Client Web Platform",
-      tagline: "Production Client Business Website with Fluid Micro-UX",
-      category: "fullstack",
-      categoryLabel: "Client Project",
+      title: "Gymnex — AI Fitness Assistant",
+      tagline: "AI Workout & Nutrition Planner with Gemini API",
+      category: "ai",
+      categoryLabel: "Live AI Platform",
+      featured: false,
       description:
-        "Production website created for a fitness studio client. Packed with fluid Framer Motion animations, membership tier calculators, fast inquiry forms, and near-perfect Lighthouse performance scores.",
+        "Production AI fitness assistant powered by Google Gemini API. Generates customized fitness schedules, personalized diet plans, and real-time guidance with Clerk authentication and MongoDB persistence.",
       highlights: [
-        "Custom responsive design with Framer Motion fluid animations",
-        "Membership inquiry workflow & dynamic pricing tiers",
-        "Deployed on Vercel with high SEO & performance scores",
+        "Gemini API generative prompt orchestration with structured JSON completions",
+        "Clerk secure social login & MongoDB Atlas data synchronization",
+        "Live on Vercel with active real-world usage and fast edge responses",
       ],
-      tech: ["React", "Tailwind CSS", "Framer Motion", "Vite", "Responsive Design"],
+      tech: [
+        "Gemini",
+        "Node.js",
+        "MongoDB",
+        "TypeScript",
+        "Docker",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/Gymnex",
+      live: "https://gymnex.vercel.app/",
+      image: gymnexImage,
+      iconLogo: <TechIcons.Gemini className="w-4 h-4" />,
+    },
+    {
+      id: 9,
+      title: "Saral-Gym — Client Web Platform",
+      tagline: "Production Business Platform with Fluid Micro-UX",
+      category: "fullstack",
+      categoryLabel: "Production Client Web",
+      featured: false,
+      description:
+        "Production website engineered for a fitness studio client with fluid Framer Motion animations, membership tier calculators, dynamic inquiry routing, and near-perfect Lighthouse scores.",
+      highlights: [
+        "Custom responsive design with Framer Motion fluid micro-interactions",
+        "Membership inquiry workflow & dynamic pricing calculation engine",
+        "Production deployment on Vercel with high SEO & performance scores",
+      ],
+      tech: [
+        "React",
+        "Node.js",
+        "TypeScript",
+        "Linux",
+      ],
       github: "https://github.com/SHIVA-SINGHx/Saral-Gym-Website",
       live: "https://saral-gym-website.vercel.app/",
       image: saralgymImage,
-      icon: <Layers className="w-4 h-4 text-zinc-300" />,
+      iconLogo: <TechIcons.ReactIcon className="w-4 h-4" />,
     },
   ];
 
+  // Filtering logic
   const filteredProjects =
     activeFilter === "all"
       ? projects
       : activeFilter === "cloud"
-      ? projects.filter((p) => p.category === "cloud")
-      : activeFilter === "ai"
-      ? projects.filter((p) => p.category === "ai")
-      : projects.filter((p) => p.category === "fullstack" || p.category === "systems");
+        ? projects.filter((p) => p.category === "cloud")
+        : activeFilter === "ai"
+          ? projects.filter((p) => p.category === "ai")
+          : projects.filter((p) => p.category === "fullstack");
+
+  // Show top 6 by default, or all if showAll is true (or if user filtered)
+  const displayedProjects =
+    activeFilter === "all" && !showAll
+      ? filteredProjects.slice(0, 6)
+      : filteredProjects;
 
   return (
     <section id="projects" className="py-16 md:py-20 border-b border-zinc-900">
@@ -261,169 +311,200 @@ const Projects = () => {
           {/* Filter Pills */}
           <div className="inline-flex p-1 rounded-lg bg-zinc-950 border border-zinc-800 text-xs font-mono">
             <button
-              onClick={() => setActiveFilter("all")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeFilter === "all"
+              onClick={() => {
+                setActiveFilter("all");
+              }}
+              className={`px-3 py-1 rounded-md transition-all ${activeFilter === "all"
                   ? "bg-zinc-800 text-white font-medium"
                   : "text-zinc-400 hover:text-zinc-200"
-              }`}
+                }`}
             >
               All ({projects.length})
             </button>
             <button
-              onClick={() => setActiveFilter("cloud")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeFilter === "cloud"
+              onClick={() => {
+                setActiveFilter("cloud");
+                setShowAll(true);
+              }}
+              className={`px-3 py-1 rounded-md transition-all ${activeFilter === "cloud"
                   ? "bg-zinc-800 text-white font-medium"
                   : "text-zinc-400 hover:text-zinc-200"
-              }`}
+                }`}
             >
-              Cloud & DevOps (4)
+              Cloud & DevOps (6)
             </button>
             <button
-              onClick={() => setActiveFilter("ai")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeFilter === "ai"
+              onClick={() => {
+                setActiveFilter("fullstack");
+                setShowAll(true);
+              }}
+              className={`px-3 py-1 rounded-md transition-all ${activeFilter === "fullstack"
                   ? "bg-zinc-800 text-white font-medium"
                   : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              AI (2)
-            </button>
-            <button
-              onClick={() => setActiveFilter("fullstack")}
-              className={`px-3 py-1 rounded-md transition-all ${
-                activeFilter === "fullstack"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
+                }`}
             >
               Full Stack (2)
+            </button>
+            <button
+              onClick={() => {
+                setActiveFilter("ai");
+                setShowAll(true);
+              }}
+              className={`px-3 py-1 rounded-md transition-all ${activeFilter === "ai"
+                  ? "bg-zinc-800 text-white font-medium"
+                  : "text-zinc-400 hover:text-zinc-200"
+                }`}
+            >
+              AI (1)
             </button>
           </div>
         </motion.div>
 
-        {/* Projects Grid with AnimatePresence for smooth filter transitions */}
+        {/* Projects Grid with AnimatePresence */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              layout
-              initial={{ opacity: 0, y: 20, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.97 }}
-              transition={{ duration: 0.3, delay: idx * 0.04 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-colors duration-300 group"
-            >
-              <div>
-                {/* Image Preview if available */}
-                {project.image && (
-                  <div className="w-full h-44 mb-4 rounded-xl overflow-hidden border border-zinc-850 bg-zinc-900 relative">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                    />
-                  </div>
-                )}
+            {displayedProjects.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.97 }}
+                transition={{ duration: 0.3, delay: idx * 0.04 }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-zinc-950 border border-zinc-850 hover:border-zinc-700 transition-colors duration-300 group"
+              >
+                <div>
+                  {/* Image Preview if available */}
+                  {project.image && (
+                    <div className="w-full h-44 mb-4 rounded-xl overflow-hidden border border-zinc-850 bg-zinc-900 relative">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                      />
+                    </div>
+                  )}
 
-                {/* Card Top Category & Action Links */}
-                <div className="flex items-center justify-between gap-2 mb-2.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="p-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300">
-                      {project.icon}
-                    </span>
-                    <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
-                      {project.categoryLabel}
-                    </span>
+                  {/* Card Top Category & Action Links */}
+                  <div className="flex items-center justify-between gap-2 mb-2.5">
+                    <div className="flex items-center gap-1.5">
+                      <span className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                        {project.iconLogo}
+                      </span>
+                      <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                        {project.categoryLabel}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors"
+                          title="GitHub Repository"
+                        >
+                          <Github className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors"
+                          title="Live Preview"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors"
-                        title="GitHub Repository"
-                      >
-                        <Github className="w-3.5 h-3.5" />
-                      </a>
-                    )}
+                  {/* Title & Tagline */}
+                  <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-zinc-200 transition-colors flex items-center justify-between">
+                    <span>{project.title}</span>
                     {project.live && (
                       <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors"
-                        title="Live Preview"
+                        className="text-zinc-600 group-hover:text-zinc-300 transition-colors"
                       >
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <ArrowUpRight className="w-4 h-4" />
                       </a>
                     )}
+                  </h3>
+                  <p className="text-xs font-mono text-zinc-400 mt-0.5 mb-3">
+                    {project.tagline}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-3">
+                    {project.description}
+                  </p>
+
+                  {/* Highlights Bullet List */}
+                  {project.highlights && (
+                    <ul className="space-y-1 mb-4">
+                      {project.highlights.map((h, i) => (
+                        <li
+                          key={i}
+                          className="text-xs text-zinc-300 flex items-start gap-1.5"
+                        >
+                          <span className="w-1 h-1 rounded-full bg-zinc-500 mt-1.5 shrink-0"></span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                {/* Tech Badges with Official Logos */}
+                <div className="pt-3 border-t border-zinc-900">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-zinc-900/90 border border-zinc-850 text-[11px] font-mono text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors"
+                      >
+                        <span className="shrink-0 scale-90">
+                          {getTechIcon(t)}
+                        </span>
+                        <span>{t}</span>
+                      </span>
+                    ))}
                   </div>
                 </div>
-
-                {/* Title & Tagline */}
-                <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-zinc-200 transition-colors flex items-center justify-between">
-                  <span>{project.title}</span>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-zinc-600 group-hover:text-zinc-300 transition-colors"
-                    >
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
-                  )}
-                </h3>
-                <p className="text-xs font-mono text-zinc-400 mt-0.5 mb-3">
-                  {project.tagline}
-                </p>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-3">
-                  {project.description}
-                </p>
-
-                {/* Bullets */}
-                {project.highlights && (
-                  <ul className="space-y-1 mb-4">
-                    {project.highlights.map((h, i) => (
-                      <li
-                        key={i}
-                        className="text-xs text-zinc-300 flex items-start gap-1.5"
-                      >
-                        <span className="w-1 h-1 rounded-full bg-zinc-500 mt-1.5 shrink-0"></span>
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-              {/* Tech Badges */}
-              <div className="pt-3 border-t border-zinc-900">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 rounded bg-zinc-900/90 border border-zinc-850 text-[11px] font-mono text-zinc-400"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
           </AnimatePresence>
         </div>
 
-        {/* GitHub footer banner with Motion */}
+        {/* Show More / Show Less Toggle Button */}
+        {activeFilter === "all" && projects.length > 6 && (
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-200 hover:bg-zinc-900 hover:border-zinc-750 transition-all duration-200 active:scale-95 shadow-sm"
+            >
+              <span>
+                {showAll
+                  ? "Show Top 6 Projects"
+                  : `Show All Projects (${projects.length})`}
+              </span>
+              {showAll ? (
+                <ChevronUp className="w-4 h-4 text-zinc-400" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-zinc-400" />
+              )}
+            </button>
+          </div>
+        )}
+
+        {/* GitHub footer banner */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -431,7 +512,7 @@ const Projects = () => {
           transition={{ duration: 0.4 }}
           className="mt-8 p-4 rounded-xl bg-zinc-950 border border-zinc-850 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-400"
         >
-          <span>Explore more active repositories and experiments on GitHub</span>
+          <span>Explore all active repositories and IaC configs on GitHub</span>
           <a
             href="https://github.com/SHIVA-SINGHx"
             target="_blank"

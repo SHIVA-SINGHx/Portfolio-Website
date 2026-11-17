@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Code2, PenTool, ExternalLink, Briefcase } from "lucide-react";
+import { Calendar, MapPin, ExternalLink, Briefcase, PenTool, Code2 } from "lucide-react";
+import { TechIcons, getTechIcon } from "./icons/TechIcons";
 
 const Experience = () => {
   const experiences = [
@@ -12,14 +13,14 @@ const Experience = () => {
       type: "Internship",
       badge: "Internship",
       description:
-        "Worked as a full-stack and cloud developer intern, designing and building REST APIs, managing multi-database architectures, and deploying production-grade applications on AWS infrastructure.",
+        "Engineered scalable REST APIs, managed multi-database architectures, and deployed production-grade applications on AWS cloud infrastructure with secure VPC networking.",
       highlights: [
-        "Designed and built REST API endpoints using Node.js, TypeScript, and FastAPI, covering authentication, validation, and CRUD for client website projects.",
-        "Modeled and managed data across MongoDB, PostgreSQL, and MySQL, choosing the database based on data structure and query needs.",
-        "Deployed applications to production on AWS EC2 with RDS and S3, configuring networking through VPC and security groups.",
+        "Designed and built REST API endpoints using Node.js, TypeScript, and FastAPI, covering authentication, validation, and CRUD operations for client web platforms.",
+        "Modeled and managed data across MongoDB, PostgreSQL, and MySQL, optimizing database selection according to access patterns and query complexity.",
+        "Deployed applications to production on AWS EC2 with RDS and S3, configuring networking through isolated VPC subnets and security groups.",
       ],
-      skills: ["Node.js", "TypeScript", "FastAPI", "MongoDB", "PostgreSQL", "MySQL", "AWS EC2", "RDS", "S3", "VPC"],
-      icon: <Briefcase className="w-4 h-4 text-zinc-300" />,
+      skills: ["Node.js", "TypeScript", "FastAPI", "MongoDB", "PostgreSQL", "MySQL", "AWS", "EC2", "RDS", "S3", "VPC"],
+      iconLogo: <TechIcons.AWS className="w-5 h-5" />,
       link: null,
     },
     {
@@ -31,30 +32,29 @@ const Experience = () => {
       description:
         "Authoring in-depth technical articles, system architecture breakdowns, and code blueprints focusing on Python backend development, API design, and Linux DevOps fundamentals.",
       highlights: [
-        "Published 5+ technical articles covering Python, backend APIs, and Linux fundamentals.",
-        "Created hands-on guides with code examples for FastAPI, PostgreSQL integration, and NumPy / Pandas workflows.",
-        "Authored developer blueprints on Docker containerization, shell scripting, and multi-tier cloud deployments.",
+        "Published 5+ technical articles covering Python, backend APIs, containerization, and Linux system fundamentals.",
+        "Created hands-on developer guides with runnable code examples for FastAPI, PostgreSQL integration, and asynchronous workflows.",
+        "Authored blueprints on Docker multi-stage builds, shell scripting automation, and multi-tier cloud deployments.",
       ],
-      skills: ["Python", "FastAPI", "PostgreSQL", "Docker", "Linux", "NumPy", "Pandas", "Medium"],
-      icon: <PenTool className="w-4 h-4 text-zinc-300" />,
+      skills: ["Python", "FastAPI", "PostgreSQL", "Docker", "Linux", "Bash"],
+      iconLogo: <TechIcons.Python className="w-5 h-5" />,
       link: "https://medium.com/@shivasingh.1dev",
     },
     {
-      role: "Full Stack & Cloud Developer",
-      organization: "Projects & Production Builds",
+      role: "Cloud & Infrastructure Engineer",
+      organization: "Production Deployments & Open Source",
       period: "2024 – Present",
       location: "Delhi, India / Remote",
       type: "Engineering & Architecture",
       description:
-        "Engineering responsive web applications, containerized microservices, and AI-driven platforms with modern full-stack technologies, automated CI/CD pipelines, and cloud hosting.",
+        "Designing resilient cloud infrastructure with Terraform, orchestrating Kubernetes microservices with GitOps, and automating zero-downtime CI/CD pipelines.",
       highlights: [
-        "Architected Tech-Cart e-commerce engine with multi-stage Docker builds reducing deployment time from 15 minutes to under 3 minutes.",
-        "Built automated Node.js CI/CD pipelines with GitHub Actions and multi-stage Docker builds to automate testing and production server deployment.",
-        "Created Lexify AI and Gymnex leveraging Google Gemini API for intelligent generative workflows and structured completions.",
-        "Deployed cloud infrastructure on AWS VPC with EC2, RDS MySQL, and NGINX reverse proxies.",
+        "Deployed 3-tier AWS infrastructure across 2 AZs using modular Terraform with ALBs, EC2 Auto Scaling, and RDS PostgreSQL.",
+        "Orchestrated Kubernetes microservices on AWS EC2 with Argo CD GitOps delivery and Prometheus/Grafana observability.",
+        "Built automated DevSecOps pipelines integrating SonarQube SAST, OWASP Dependency-Check, and Trivy vulnerability scans.",
       ],
-      skills: ["React.js", "Next.js", "Node.js", "FastAPI", "Docker", "AWS", "MongoDB", "PostgreSQL", "Gemini API"],
-      icon: <Code2 className="w-4 h-4 text-zinc-300" />,
+      skills: ["Terraform", "Kubernetes", "AWS", "Docker", "Argo CD", "Jenkins", "GitHub Actions", "Prometheus", "Grafana", "Go"],
+      iconLogo: <TechIcons.Kubernetes className="w-5 h-5" />,
       link: "https://github.com/SHIVA-SINGHx",
     },
   ];
@@ -98,8 +98,8 @@ const Experience = () => {
               {/* Header row */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300">
-                    {exp.icon}
+                  <div className="p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                    {exp.iconLogo}
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-zinc-200 transition-colors flex items-center gap-2 flex-wrap">
@@ -151,14 +151,17 @@ const Experience = () => {
                 ))}
               </ul>
 
-              {/* Skill Badges */}
-              <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-900">
+              {/* Skill Badges with Official Logos */}
+              <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-900">
                 {exp.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-2.5 py-0.5 rounded-md bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-400 group-hover:text-zinc-200 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-300 group-hover:text-zinc-100 group-hover:border-zinc-700 transition-colors"
                   >
-                    {skill}
+                    <span className="shrink-0 scale-90">
+                      {getTechIcon(skill)}
+                    </span>
+                    <span>{skill}</span>
                   </span>
                 ))}
               </div>
