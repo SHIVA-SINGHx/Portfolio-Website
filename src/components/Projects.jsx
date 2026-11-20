@@ -12,15 +12,16 @@ import { TechIcons, getTechIcon } from "./icons/TechIcons";
 import quicktoImage from "../assets/quickto.png";
 import terraformArchImage from "../assets/terraform-tier-3.png";
 import gymnexImage from "../assets/gymnex.png";
-import saralgymImage from "../assets/saralgym.png";
 import techcartImage from "../assets/techcart.png";
 import k8sVotingImage from "../assets/k8s-voting.png";
+import libraryImage from "../assets/library.png";
+import vaanisetuImage from "../assets/vaanisetu.png";
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [showAll, setShowAll] = useState(false);
 
-  // All 9 projects ordered with Top 6 priority:
+  // All 11 projects ordered with Top 6 priority:
   const projects = [
     {
       id: 1,
@@ -111,6 +112,35 @@ const Projects = () => {
     },
     {
       id: 4,
+      title: "Jerney — 3-Tier DevSecOps Blog Platform",
+      tagline: "EKS Deployment with Terraform & GitHub Actions Security Gates",
+      category: "cloud",
+      categoryLabel: "Cloud & DevSecOps",
+      featured: true,
+      description:
+        "Production-style 3-tier blog platform on AWS. Combines React frontend, Node.js/Express REST API, and PostgreSQL persistence with Docker containerization, AWS VPC and Amazon EKS Auto Mode cluster provisioned by Terraform, and a security-hardened GitHub Actions CI/CD pipeline.",
+      highlights: [
+        "Automated CI/CD pipeline featuring code linting, vulnerability scanning, and Docker builds",
+        "Terraform IaC provisioning AWS VPC, EKS cluster, storage classes, and IAM roles",
+        "Kubernetes orchestration with NodePort and ClusterIP services, health probes, and network policies",
+      ],
+      tech: [
+        "Kubernetes",
+        "Terraform",
+        "AWS",
+        "GitHub Actions",
+        "Docker",
+        "Node.js",
+        "PostgreSQL",
+        "Linux",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/Blog-App-3-Tier-DevSecops-Deployment",
+      live: null,
+      image: null,
+      iconLogo: <TechIcons.Kubernetes className="w-4 h-4" />,
+    },
+    {
+      id: 5,
       title: "Go Distributed Microservices",
       tagline: "Service Catalog & Bookings with gRPC & RabbitMQ",
       category: "cloud",
@@ -138,7 +168,7 @@ const Projects = () => {
       iconLogo: <TechIcons.Go className="w-4 h-4" />,
     },
     {
-      id: 5,
+      id: 6,
       title: "End-to-End Three-Tier DevSecOps Pipeline",
       tagline: "Jenkins CI/CD with SonarQube, Trivy & OWASP Security Gates",
       category: "cloud",
@@ -167,12 +197,12 @@ const Projects = () => {
       iconLogo: <TechIcons.Jenkins className="w-4 h-4" />,
     },
     {
-      id: 6,
+      id: 7,
       title: "Node.js App CI/CD Pipeline",
       tagline: "Automated Containerization & Continuous Delivery",
       category: "cloud",
       categoryLabel: "DevOps & Automation",
-      featured: true,
+      featured: false,
       description:
         "Production-grade continuous integration and continuous delivery pipeline. Automates linting, unit testing, multi-stage Docker builds, image publishing to Docker Hub, and zero-downtime automated deployment to remote Linux servers.",
       highlights: [
@@ -193,7 +223,59 @@ const Projects = () => {
       iconLogo: <TechIcons.GitHubActions className="w-4 h-4" />,
     },
     {
-      id: 7,
+      id: 8,
+      title: "Library Management System (LMS)",
+      tagline: "Containerized MERN Architecture with AWS EC2 Deployment",
+      category: "fullstack",
+      categoryLabel: "Full Stack & Cloud",
+      featured: false,
+      description:
+        "Modern full-stack MERN application engineered to streamline book cataloging, circulation tracking, fine automation, and role-based access for admins and students. Fully containerized with Docker and production-deployed on AWS EC2.",
+      highlights: [
+        "Role-based authentication & access control for librarians, admins, and students with JWT",
+        "Automated circulation tracking, overdue fine calculation, and book issue/return ledger",
+        "Multi-stage Docker containerization and production deployment on AWS EC2 instance",
+      ],
+      tech: [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Docker",
+        "AWS",
+        "TypeScript",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/Library-Management-System",
+      live: "https://library-management-system-brown-phi.vercel.app/",
+      image: libraryImage,
+      iconLogo: <TechIcons.ReactIcon className="w-4 h-4" />,
+    },
+    {
+      id: 9,
+      title: "VaaniSetu — Indic Language Learning Platform",
+      tagline: "Interactive & Gamified Web Platform with Web Speech Synthesis",
+      category: "fullstack",
+      categoryLabel: "Full Stack & Next.js",
+      featured: false,
+      description:
+        "Interactive multilingual learning platform bridging Indian languages and scripts through 6 gamified learning arcade modes, multi-engine translation bridges, cultural explorers, and zero-asset synthesized Web Audio & Speech APIs.",
+      highlights: [
+        "6 interactive learning arcade game modes with streak tracking, gamification, and badges",
+        "Multi-engine translator bridge supporting regional Indian scripts and phonetics",
+        "Synthesized zero-asset audio pronunciation powered by modern Web Speech API",
+      ],
+      tech: [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "REST APIs",
+      ],
+      github: "https://github.com/SHIVA-SINGHx/vaanisetu-v2",
+      live: vaanisetu - v2.vercel.app,
+      image: vaanisetuImage,
+      iconLogo: <TechIcons.TypeScript className="w-4 h-4" />,
+    },
+    {
+      id: 10,
       title: "Tech-Cart — Full-Stack E-Commerce Engine",
       tagline: "Dockerized Retail System with Real-Time Inventory",
       category: "fullstack",
@@ -220,7 +302,7 @@ const Projects = () => {
       iconLogo: <TechIcons.Docker className="w-4 h-4" />,
     },
     {
-      id: 8,
+      id: 11,
       title: "Gymnex — AI Fitness Assistant",
       tagline: "AI Workout & Nutrition Planner with Gemini API",
       category: "ai",
@@ -244,31 +326,6 @@ const Projects = () => {
       live: "https://gymnex.vercel.app/",
       image: gymnexImage,
       iconLogo: <TechIcons.Gemini className="w-4 h-4" />,
-    },
-    {
-      id: 9,
-      title: "Saral-Gym — Client Web Platform",
-      tagline: "Production Business Platform with Fluid Micro-UX",
-      category: "fullstack",
-      categoryLabel: "Production Client Web",
-      featured: false,
-      description:
-        "Production website engineered for a fitness studio client with fluid Framer Motion animations, membership tier calculators, dynamic inquiry routing, and near-perfect Lighthouse scores.",
-      highlights: [
-        "Custom responsive design with Framer Motion fluid micro-interactions",
-        "Membership inquiry workflow & dynamic pricing calculation engine",
-        "Production deployment on Vercel with high SEO & performance scores",
-      ],
-      tech: [
-        "React",
-        "Node.js",
-        "TypeScript",
-        "Linux",
-      ],
-      github: "https://github.com/SHIVA-SINGHx/Saral-Gym-Website",
-      live: "https://saral-gym-website.vercel.app/",
-      image: saralgymImage,
-      iconLogo: <TechIcons.ReactIcon className="w-4 h-4" />,
     },
   ];
 
@@ -315,8 +372,8 @@ const Projects = () => {
                 setActiveFilter("all");
               }}
               className={`px-3 py-1 rounded-md transition-all ${activeFilter === "all"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
+                ? "bg-zinc-800 text-white font-medium"
+                : "text-zinc-400 hover:text-zinc-200"
                 }`}
             >
               All ({projects.length})
@@ -327,11 +384,11 @@ const Projects = () => {
                 setShowAll(true);
               }}
               className={`px-3 py-1 rounded-md transition-all ${activeFilter === "cloud"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
+                ? "bg-zinc-800 text-white font-medium"
+                : "text-zinc-400 hover:text-zinc-200"
                 }`}
             >
-              Cloud & DevOps (6)
+              Cloud & DevOps (7)
             </button>
             <button
               onClick={() => {
@@ -339,11 +396,11 @@ const Projects = () => {
                 setShowAll(true);
               }}
               className={`px-3 py-1 rounded-md transition-all ${activeFilter === "fullstack"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
+                ? "bg-zinc-800 text-white font-medium"
+                : "text-zinc-400 hover:text-zinc-200"
                 }`}
             >
-              Full Stack (2)
+              Full Stack (3)
             </button>
             <button
               onClick={() => {
@@ -351,8 +408,8 @@ const Projects = () => {
                 setShowAll(true);
               }}
               className={`px-3 py-1 rounded-md transition-all ${activeFilter === "ai"
-                  ? "bg-zinc-800 text-white font-medium"
-                  : "text-zinc-400 hover:text-zinc-200"
+                ? "bg-zinc-800 text-white font-medium"
+                : "text-zinc-400 hover:text-zinc-200"
                 }`}
             >
               AI (1)
