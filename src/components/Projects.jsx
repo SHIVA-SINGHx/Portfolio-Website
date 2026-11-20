@@ -270,7 +270,7 @@ const Projects = () => {
         "REST APIs",
       ],
       github: "https://github.com/SHIVA-SINGHx/vaanisetu-v2",
-      live: vaanisetu-v2.vercel.app,
+      live: "https://vaanisetu-v2.vercel.app",
       image: vaanisetuImage,
       iconLogo: <TechIcons.TypeScript className="w-4 h-4" />,
     },
